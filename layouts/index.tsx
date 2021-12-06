@@ -4,7 +4,7 @@ import Footer from "components/footer";
 import { ReactChildren } from "react";
 
 interface LayoutProps {
-  children: ReactChildren;
+  children: any;
 }
 
 export default function Layout({ children }: LayoutProps) {
