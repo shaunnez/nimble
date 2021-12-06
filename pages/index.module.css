@@ -1,0 +1,17 @@
+.home {
+  margin-top: 105px;
+}
+
+.hero {
+  height: 766px;
+  width: 100%;
+  border: 2.5px solid white;
+  border-radius: 10px;
+}
+
+.content {
+  margin-top: 10px;
+}
+.content p {
+  margin-top: 40px;
+}
