@@ -104,13 +104,61 @@ footer {
 main {
 }
 
+p {
+  font-size: 24px;
+  line-height: 29px;
+}
+
+.slider-frame {
+  position: absolute !important;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.slider-list,
+.slider-slide {
+  height: 100% !important;
+}
+
+.mobileBackBtn {
+  display: none;
+}
 @media screen and (max-width: 768px) {
   body {
     padding: 20px 18px;
+    overflow-x: hidden;
   }
 
   header div {
     width: 150px;
     height: 38px;
+  }
+  p {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  button {
+    font-size: 12px;
+    line-height: 15px;
+    height: 25px;
+    border-radius: 7px;
+    padding: 0px 12px;
+    border-width: 1px;
+  }
+
+  .desktopBackBtn {
+    display: none;
+  }
+  .mobileBackBtn {
+    display: block;
+  }
+  footer {
+    font-size: 24px;
+    line-height: 29px;
+    font-size: 12px;
+    line-height: 15px;
   }
 }

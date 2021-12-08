@@ -5,6 +5,14 @@
   flex-wrap: wrap;
 }
 
+.contact h4 {
+  font-size: 25px;
+  line-height: 30px;
+  font-weight: normal;
+  margin: 0;
+  margin-bottom: 51px;
+}
+
 .form {
   width: 385px;
   flex-grow: 0;
@@ -17,6 +25,10 @@
   flex-direction: column;
 }
 
+.row label {
+  font-size: 19px;
+  line-height: 24px;
+}
 .row input {
   border-radius: 10px;
   background: white;
@@ -36,22 +48,58 @@
   margin-left: 346px;
 }
 
+.content p {
+  font-size: 17px;
+  line-height: 21px;
+}
 .spacer {
   flex-grow: 1;
 }
 
 .form button {
-  max-width: 124px;
+  max-width: 164px;
+}
+
+.error {
+  color: var(--orange);
+  font-weight: bold;
+  font-size: 100%;
 }
 
 @media screen and (max-width: 1023px) {
+  .contact {
+    margin-top: 44px;
+  }
   .form {
     width: 100%;
   }
 
+  .contact h4 {
+    font-size: 18px;
+    line-height: 23px;
+    margin-bottom: 20px;
+  }
   .content {
     margin-left: 0px;
     width: 100%;
     margin-top: 30px;
+  }
+  .row label {
+    font-size: 14px;
+    line-height: 18px;
+  }
+  .row input {
+    font-size: 14px;
+    line-height: 18px;
+  }
+  .form button {
+    height: 34px;
+    font-size: 16px;
+    line-height: 21px;
+  }
+  .content p,
+  .content .error {
+    font-size: 11px;
+    line-height: 14px;
   }
 }

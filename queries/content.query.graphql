@@ -1,0 +1,38 @@
+query GetContent {
+  home(where: { id: "ckwwvtah41ajn0b879604sx4k" }) {
+    heroText {
+      html
+    }
+    heroVideo {
+      id
+      fileName
+      url
+    }
+    smallText {
+      html
+    }
+    mediumText {
+      html
+    }
+    largeText {
+      html
+    }
+    projects {
+      id
+      projectType
+      title
+      headline
+      description
+      tileImage {
+        id
+        fileName
+        url
+      }
+      assets {
+        id
+        fileName
+        url
+      }
+    }
+  }
+}

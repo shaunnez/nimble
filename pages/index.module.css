@@ -3,10 +3,22 @@
 }
 
 .hero {
-  height: 766px;
-  width: 100%;
   border: 2.5px solid white;
   border-radius: 10px;
+  overflow: hidden;
+}
+
+.playerWrapper {
+  position: relative;
+  padding-top: calc(766 / 1688 * 100%);
+  border-radius: 10px;
+  background: var(--black);
+}
+
+.reactPlayer {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .content {
@@ -14,4 +26,299 @@
 }
 .content p {
   margin-top: 40px;
+}
+.section {
+  margin-top: 90px;
+}
+
+.section h3 {
+  display: flex;
+  align-items: center;
+  font-size: 60px;
+  line-height: 1;
+  margin: 0;
+}
+
+.section h3 span {
+  background: white;
+  border-radius: 100%;
+  text-transform: uppercase;
+  color: var(--blue);
+  width: 44px;
+  height: 44px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 24px;
+  font-size: 21px;
+  line-height: 1;
+}
+
+.section h3 {
+  text-transform: capitalize;
+}
+
+.section > div {
+  padding-top: 16px;
+}
+.section > div p:first-child {
+  margin-top: 0px;
+}
+
+.sectionContent {
+  max-width: 1071px;
+}
+
+.projects {
+  margin: -12.5px;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.projects .project:hover {
+  transform: scale(1.05);
+  z-index: 1;
+}
+
+.projects .projectDescription {
+  display: none;
+}
+.projects .project:hover .projectDescription {
+  display: block;
+}
+
+.project {
+  margin: 12.5px;
+  width: calc(33.33% - 25px);
+  height: 362px;
+  flex-shrink: 0;
+  flex-grow: 0;
+  background: var(--grey-dark);
+  padding: 20px 30px;
+  transition: all 0.25s ease-in-out;
+  position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.projectTitle {
+  font-size: 36px;
+  line-height: 46px;
+}
+
+.projectHeadline {
+  font-size: 30px;
+  line-height: 38px;
+  font-weight: bold;
+}
+
+.projectDescription {
+  font-size: 24px;
+  line-height: 29px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.projects .projectDescription {
+  margin-top: 34px;
+}
+.project a {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.fullView {
+  margin-left: 12.5px;
+  margin-right: 12.5px;
+  width: calc(100% - 25px);
+  padding-top: 26px;
+  margin-bottom: 75px;
+}
+
+.fullView > section {
+  padding-top: calc(766 / 1688 * 100%);
+}
+.projectReactPlayer {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.fullView .reactPlayer {
+  padding-bottom: 51px;
+  position: relative;
+}
+.fullView .reactPlayer video {
+  background: var(--black);
+}
+.fullView .image {
+  padding-bottom: 51px;
+  min-height: calc(100% - 51px);
+  height: auto !important;
+  background-size: cover;
+}
+.fullView li button {
+  transform: scale(2);
+}
+
+.fullViewContent {
+  margin-top: 40px;
+}
+
+.fullViewContent .projectTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.fullViewContent .projectHeadline {
+  margin-bottom: 18px;
+}
+
+.fullViewContent .projectDescription {
+  max-width: 1071px;
+}
+
+.closeButton {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  z-index: 4;
+  border: none;
+  transition: all 0.25s ease-in-out;
+}
+
+.closeButton:hover {
+  background: none;
+  opacity: 0.5;
+}
+
+.mobileFullView {
+  display: none !important;
+}
+
+@media screen and (max-width: 768px) {
+  .home {
+    margin-top: 36px;
+  }
+  .content {
+    margin-top: 0px;
+  }
+  .content p {
+    margin-top: 30px;
+  }
+  .playerWrapper {
+    padding-top: calc(154 / 341 * 100%);
+  }
+
+  .section {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+  }
+  .section h3 {
+    display: flex;
+    align-items: center;
+    font-size: 28px;
+    order: 1;
+  }
+
+  .section h3 span {
+    font-size: 18px;
+  }
+
+  .sectionContent {
+    order: 2;
+  }
+  .mobileFullView {
+    display: block !important;
+    order: 0;
+    padding-top: 0px !important;
+    margin-left: -20px;
+    margin-right: -20px;
+  }
+
+  .mobileFullView .fullView {
+    padding-top: 0px;
+  }
+
+  .mobileFullView .fullView > section {
+    padding-top: 0;
+    height: 218px !important;
+  }
+
+  .mobileFullView .fullView .fullViewContent {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .projects {
+    margin: 0;
+    width: calc(100% + 40px);
+    flex-wrap: nowrap;
+    overflow: auto;
+    margin: 0px -20px;
+    order: 1;
+    padding-bottom: 16px;
+  }
+
+  .projects .fullView {
+    display: none !important;
+  }
+  .project {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    height: 149px;
+    width: 149px;
+    margin: 0px 10px;
+    padding: 12px 8px;
+    flex-basis: 40%;
+    flex-grow: 1;
+    max-width: 50%;
+  }
+
+  .projects .project:hover {
+    transform: none;
+  }
+  .projects .project:hover .projectDescription {
+    display: none;
+  }
+
+  .projectTitle {
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  .projectHeadline {
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: normal;
+  }
+
+  .projectDescription {
+    font-size: 12px;
+    line-height: 15px;
+  }
+  .fullView {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+  }
+
+  .fullViewContent .projectTitle {
+    margin-bottom: 0;
+  }
+
+  .closeButton {
+    top: 8px;
+    right: 8px;
+    height: 18px;
+    width: 18px;
+  }
 }
