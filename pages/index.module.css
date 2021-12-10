@@ -77,7 +77,7 @@
   position: relative;
 }
 
-.projects .project:hover {
+.projects .project:hover svg {
   transform: scale(1.05);
   z-index: 1;
 }
@@ -162,7 +162,7 @@
   height: auto !important;
   background-size: cover;
 }
-.fullView li button {
+.fullView li button svg {
   transform: scale(2);
 }
 
