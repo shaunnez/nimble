@@ -773,6 +773,366 @@ export type ConnectPositionInput = {
   start?: Maybe<Scalars['Boolean']>;
 };
 
+export type Contact = Node & {
+  __typename?: 'Contact';
+  /** The time the document was created */
+  createdAt: Scalars['DateTime'];
+  /** User that created this document */
+  createdBy?: Maybe<User>;
+  /** Get the document in other stages */
+  documentInStages: Array<Contact>;
+  getInTouch?: Maybe<RichText>;
+  /** List of Contact versions */
+  history: Array<Version>;
+  /** The unique identifier */
+  id: Scalars['ID'];
+  /** The time the document was published. Null on documents in draft stage. */
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  /** User that last published this document */
+  publishedBy?: Maybe<User>;
+  scheduledIn: Array<ScheduledOperation>;
+  /** System stage field */
+  stage: Stage;
+  /** The time the document was updated */
+  updatedAt: Scalars['DateTime'];
+  /** User that last updated this document */
+  updatedBy?: Maybe<User>;
+};
+
+
+export type ContactCreatedByArgs = {
+  locales?: Maybe<Array<Locale>>;
+};
+
+
+export type ContactDocumentInStagesArgs = {
+  includeCurrent?: Scalars['Boolean'];
+  inheritLocale?: Scalars['Boolean'];
+  stages?: Array<Stage>;
+};
+
+
+export type ContactHistoryArgs = {
+  limit?: Scalars['Int'];
+  skip?: Scalars['Int'];
+  stageOverride?: Maybe<Stage>;
+};
+
+
+export type ContactPublishedByArgs = {
+  locales?: Maybe<Array<Locale>>;
+};
+
+
+export type ContactScheduledInArgs = {
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  locales?: Maybe<Array<Locale>>;
+  skip?: Maybe<Scalars['Int']>;
+  where?: Maybe<ScheduledOperationWhereInput>;
+};
+
+
+export type ContactUpdatedByArgs = {
+  locales?: Maybe<Array<Locale>>;
+};
+
+export type ContactConnectInput = {
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  position?: Maybe<ConnectPositionInput>;
+  /** Document to connect */
+  where: ContactWhereUniqueInput;
+};
+
+/** A connection to a list of items. */
+export type ContactConnection = {
+  __typename?: 'ContactConnection';
+  aggregate: Aggregate;
+  /** A list of edges. */
+  edges: Array<ContactEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+export type ContactCreateInput = {
+  createdAt?: Maybe<Scalars['DateTime']>;
+  getInTouch?: Maybe<Scalars['RichTextAST']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
+export type ContactCreateManyInlineInput = {
+  /** Connect multiple existing Contact documents */
+  connect?: Maybe<Array<ContactWhereUniqueInput>>;
+  /** Create and connect multiple existing Contact documents */
+  create?: Maybe<Array<ContactCreateInput>>;
+};
+
+export type ContactCreateOneInlineInput = {
+  /** Connect one existing Contact document */
+  connect?: Maybe<ContactWhereUniqueInput>;
+  /** Create and connect one Contact document */
+  create?: Maybe<ContactCreateInput>;
+};
+
+/** An edge in a connection. */
+export type ContactEdge = {
+  __typename?: 'ContactEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String'];
+  /** The item at the end of the edge. */
+  node: Contact;
+};
+
+/** Identifies documents */
+export type ContactManyWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: Maybe<Array<ContactWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<Array<ContactWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: Maybe<Array<ContactWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: Maybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: Maybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  createdAt_lt?: Maybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: Maybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  createdAt_not?: Maybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
+  createdBy?: Maybe<UserWhereInput>;
+  id?: Maybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  id_contains?: Maybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: Maybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: Maybe<Array<Scalars['ID']>>;
+  /** All values that are not equal to given value. */
+  id_not?: Maybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: Maybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: Maybe<Scalars['ID']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: Maybe<Array<Scalars['ID']>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: Maybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: Maybe<Scalars['ID']>;
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: Maybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: Maybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: Maybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: Maybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: Maybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
+  publishedBy?: Maybe<UserWhereInput>;
+  scheduledIn_every?: Maybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: Maybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: Maybe<ScheduledOperationWhereInput>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: Maybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: Maybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: Maybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: Maybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  updatedAt_not?: Maybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
+  updatedBy?: Maybe<UserWhereInput>;
+};
+
+export enum ContactOrderByInput {
+  CreatedAtAsc = 'createdAt_ASC',
+  CreatedAtDesc = 'createdAt_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  PublishedAtAsc = 'publishedAt_ASC',
+  PublishedAtDesc = 'publishedAt_DESC',
+  UpdatedAtAsc = 'updatedAt_ASC',
+  UpdatedAtDesc = 'updatedAt_DESC'
+}
+
+export type ContactUpdateInput = {
+  getInTouch?: Maybe<Scalars['RichTextAST']>;
+};
+
+export type ContactUpdateManyInlineInput = {
+  /** Connect multiple existing Contact documents */
+  connect?: Maybe<Array<ContactConnectInput>>;
+  /** Create and connect multiple Contact documents */
+  create?: Maybe<Array<ContactCreateInput>>;
+  /** Delete multiple Contact documents */
+  delete?: Maybe<Array<ContactWhereUniqueInput>>;
+  /** Disconnect multiple Contact documents */
+  disconnect?: Maybe<Array<ContactWhereUniqueInput>>;
+  /** Override currently-connected documents with multiple existing Contact documents */
+  set?: Maybe<Array<ContactWhereUniqueInput>>;
+  /** Update multiple Contact documents */
+  update?: Maybe<Array<ContactUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple Contact documents */
+  upsert?: Maybe<Array<ContactUpsertWithNestedWhereUniqueInput>>;
+};
+
+export type ContactUpdateManyInput = {
+  getInTouch?: Maybe<Scalars['RichTextAST']>;
+};
+
+export type ContactUpdateManyWithNestedWhereInput = {
+  /** Update many input */
+  data: ContactUpdateManyInput;
+  /** Document search */
+  where: ContactWhereInput;
+};
+
+export type ContactUpdateOneInlineInput = {
+  /** Connect existing Contact document */
+  connect?: Maybe<ContactWhereUniqueInput>;
+  /** Create and connect one Contact document */
+  create?: Maybe<ContactCreateInput>;
+  /** Delete currently connected Contact document */
+  delete?: Maybe<Scalars['Boolean']>;
+  /** Disconnect currently connected Contact document */
+  disconnect?: Maybe<Scalars['Boolean']>;
+  /** Update single Contact document */
+  update?: Maybe<ContactUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single Contact document */
+  upsert?: Maybe<ContactUpsertWithNestedWhereUniqueInput>;
+};
+
+export type ContactUpdateWithNestedWhereUniqueInput = {
+  /** Document to update */
+  data: ContactUpdateInput;
+  /** Unique document search */
+  where: ContactWhereUniqueInput;
+};
+
+export type ContactUpsertInput = {
+  /** Create document if it didn't exist */
+  create: ContactCreateInput;
+  /** Update document if it exists */
+  update: ContactUpdateInput;
+};
+
+export type ContactUpsertWithNestedWhereUniqueInput = {
+  /** Upsert data */
+  data: ContactUpsertInput;
+  /** Unique document search */
+  where: ContactWhereUniqueInput;
+};
+
+/** Identifies documents */
+export type ContactWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: Maybe<Array<ContactWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<Array<ContactWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: Maybe<Array<ContactWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: Maybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: Maybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  createdAt_lt?: Maybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: Maybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  createdAt_not?: Maybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
+  createdBy?: Maybe<UserWhereInput>;
+  id?: Maybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  id_contains?: Maybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: Maybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: Maybe<Array<Scalars['ID']>>;
+  /** All values that are not equal to given value. */
+  id_not?: Maybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: Maybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: Maybe<Scalars['ID']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: Maybe<Array<Scalars['ID']>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: Maybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: Maybe<Scalars['ID']>;
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: Maybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: Maybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: Maybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: Maybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: Maybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
+  publishedBy?: Maybe<UserWhereInput>;
+  scheduledIn_every?: Maybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: Maybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: Maybe<ScheduledOperationWhereInput>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: Maybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: Maybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: Maybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: Maybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  updatedAt_not?: Maybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
+  updatedBy?: Maybe<UserWhereInput>;
+};
+
+/** References Contact record uniquely */
+export type ContactWhereUniqueInput = {
+  id?: Maybe<Scalars['ID']>;
+};
+
 export enum DocumentFileTypes {
   Doc = 'doc',
   Docx = 'docx',
@@ -835,6 +1195,410 @@ export type DocumentVersion = {
   id: Scalars['ID'];
   revision: Scalars['Int'];
   stage: Stage;
+};
+
+export type Footer = Node & {
+  __typename?: 'Footer';
+  copy?: Maybe<Scalars['String']>;
+  /** The time the document was created */
+  createdAt: Scalars['DateTime'];
+  /** User that created this document */
+  createdBy?: Maybe<User>;
+  /** Get the document in other stages */
+  documentInStages: Array<Footer>;
+  /** List of Footer versions */
+  history: Array<Version>;
+  /** The unique identifier */
+  id: Scalars['ID'];
+  links: Array<RichText>;
+  /** The time the document was published. Null on documents in draft stage. */
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  /** User that last published this document */
+  publishedBy?: Maybe<User>;
+  scheduledIn: Array<ScheduledOperation>;
+  /** System stage field */
+  stage: Stage;
+  /** The time the document was updated */
+  updatedAt: Scalars['DateTime'];
+  /** User that last updated this document */
+  updatedBy?: Maybe<User>;
+};
+
+
+export type FooterCreatedByArgs = {
+  locales?: Maybe<Array<Locale>>;
+};
+
+
+export type FooterDocumentInStagesArgs = {
+  includeCurrent?: Scalars['Boolean'];
+  inheritLocale?: Scalars['Boolean'];
+  stages?: Array<Stage>;
+};
+
+
+export type FooterHistoryArgs = {
+  limit?: Scalars['Int'];
+  skip?: Scalars['Int'];
+  stageOverride?: Maybe<Stage>;
+};
+
+
+export type FooterPublishedByArgs = {
+  locales?: Maybe<Array<Locale>>;
+};
+
+
+export type FooterScheduledInArgs = {
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  locales?: Maybe<Array<Locale>>;
+  skip?: Maybe<Scalars['Int']>;
+  where?: Maybe<ScheduledOperationWhereInput>;
+};
+
+
+export type FooterUpdatedByArgs = {
+  locales?: Maybe<Array<Locale>>;
+};
+
+export type FooterConnectInput = {
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  position?: Maybe<ConnectPositionInput>;
+  /** Document to connect */
+  where: FooterWhereUniqueInput;
+};
+
+/** A connection to a list of items. */
+export type FooterConnection = {
+  __typename?: 'FooterConnection';
+  aggregate: Aggregate;
+  /** A list of edges. */
+  edges: Array<FooterEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+export type FooterCreateInput = {
+  copy?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  links?: Maybe<Array<Scalars['RichTextAST']>>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
+export type FooterCreateManyInlineInput = {
+  /** Connect multiple existing Footer documents */
+  connect?: Maybe<Array<FooterWhereUniqueInput>>;
+  /** Create and connect multiple existing Footer documents */
+  create?: Maybe<Array<FooterCreateInput>>;
+};
+
+export type FooterCreateOneInlineInput = {
+  /** Connect one existing Footer document */
+  connect?: Maybe<FooterWhereUniqueInput>;
+  /** Create and connect one Footer document */
+  create?: Maybe<FooterCreateInput>;
+};
+
+/** An edge in a connection. */
+export type FooterEdge = {
+  __typename?: 'FooterEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String'];
+  /** The item at the end of the edge. */
+  node: Footer;
+};
+
+/** Identifies documents */
+export type FooterManyWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: Maybe<Array<FooterWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<Array<FooterWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: Maybe<Array<FooterWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: Maybe<Scalars['String']>;
+  copy?: Maybe<Scalars['String']>;
+  /** All values containing the given string. */
+  copy_contains?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  copy_ends_with?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  copy_in?: Maybe<Array<Scalars['String']>>;
+  /** All values that are not equal to given value. */
+  copy_not?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  copy_not_contains?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  copy_not_ends_with?: Maybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  copy_not_in?: Maybe<Array<Scalars['String']>>;
+  /** All values not starting with the given string. */
+  copy_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  copy_starts_with?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: Maybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: Maybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  createdAt_lt?: Maybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: Maybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  createdAt_not?: Maybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
+  createdBy?: Maybe<UserWhereInput>;
+  id?: Maybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  id_contains?: Maybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: Maybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: Maybe<Array<Scalars['ID']>>;
+  /** All values that are not equal to given value. */
+  id_not?: Maybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: Maybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: Maybe<Scalars['ID']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: Maybe<Array<Scalars['ID']>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: Maybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: Maybe<Scalars['ID']>;
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: Maybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: Maybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: Maybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: Maybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: Maybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
+  publishedBy?: Maybe<UserWhereInput>;
+  scheduledIn_every?: Maybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: Maybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: Maybe<ScheduledOperationWhereInput>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: Maybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: Maybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: Maybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: Maybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  updatedAt_not?: Maybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
+  updatedBy?: Maybe<UserWhereInput>;
+};
+
+export enum FooterOrderByInput {
+  CopyAsc = 'copy_ASC',
+  CopyDesc = 'copy_DESC',
+  CreatedAtAsc = 'createdAt_ASC',
+  CreatedAtDesc = 'createdAt_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  PublishedAtAsc = 'publishedAt_ASC',
+  PublishedAtDesc = 'publishedAt_DESC',
+  UpdatedAtAsc = 'updatedAt_ASC',
+  UpdatedAtDesc = 'updatedAt_DESC'
+}
+
+export type FooterUpdateInput = {
+  copy?: Maybe<Scalars['String']>;
+  links?: Maybe<Array<Scalars['RichTextAST']>>;
+};
+
+export type FooterUpdateManyInlineInput = {
+  /** Connect multiple existing Footer documents */
+  connect?: Maybe<Array<FooterConnectInput>>;
+  /** Create and connect multiple Footer documents */
+  create?: Maybe<Array<FooterCreateInput>>;
+  /** Delete multiple Footer documents */
+  delete?: Maybe<Array<FooterWhereUniqueInput>>;
+  /** Disconnect multiple Footer documents */
+  disconnect?: Maybe<Array<FooterWhereUniqueInput>>;
+  /** Override currently-connected documents with multiple existing Footer documents */
+  set?: Maybe<Array<FooterWhereUniqueInput>>;
+  /** Update multiple Footer documents */
+  update?: Maybe<Array<FooterUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple Footer documents */
+  upsert?: Maybe<Array<FooterUpsertWithNestedWhereUniqueInput>>;
+};
+
+export type FooterUpdateManyInput = {
+  copy?: Maybe<Scalars['String']>;
+  links?: Maybe<Array<Scalars['RichTextAST']>>;
+};
+
+export type FooterUpdateManyWithNestedWhereInput = {
+  /** Update many input */
+  data: FooterUpdateManyInput;
+  /** Document search */
+  where: FooterWhereInput;
+};
+
+export type FooterUpdateOneInlineInput = {
+  /** Connect existing Footer document */
+  connect?: Maybe<FooterWhereUniqueInput>;
+  /** Create and connect one Footer document */
+  create?: Maybe<FooterCreateInput>;
+  /** Delete currently connected Footer document */
+  delete?: Maybe<Scalars['Boolean']>;
+  /** Disconnect currently connected Footer document */
+  disconnect?: Maybe<Scalars['Boolean']>;
+  /** Update single Footer document */
+  update?: Maybe<FooterUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single Footer document */
+  upsert?: Maybe<FooterUpsertWithNestedWhereUniqueInput>;
+};
+
+export type FooterUpdateWithNestedWhereUniqueInput = {
+  /** Document to update */
+  data: FooterUpdateInput;
+  /** Unique document search */
+  where: FooterWhereUniqueInput;
+};
+
+export type FooterUpsertInput = {
+  /** Create document if it didn't exist */
+  create: FooterCreateInput;
+  /** Update document if it exists */
+  update: FooterUpdateInput;
+};
+
+export type FooterUpsertWithNestedWhereUniqueInput = {
+  /** Upsert data */
+  data: FooterUpsertInput;
+  /** Unique document search */
+  where: FooterWhereUniqueInput;
+};
+
+/** Identifies documents */
+export type FooterWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: Maybe<Array<FooterWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<Array<FooterWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: Maybe<Array<FooterWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: Maybe<Scalars['String']>;
+  copy?: Maybe<Scalars['String']>;
+  /** All values containing the given string. */
+  copy_contains?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  copy_ends_with?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  copy_in?: Maybe<Array<Scalars['String']>>;
+  /** All values that are not equal to given value. */
+  copy_not?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  copy_not_contains?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  copy_not_ends_with?: Maybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  copy_not_in?: Maybe<Array<Scalars['String']>>;
+  /** All values not starting with the given string. */
+  copy_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  copy_starts_with?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: Maybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: Maybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  createdAt_lt?: Maybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: Maybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  createdAt_not?: Maybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
+  createdBy?: Maybe<UserWhereInput>;
+  id?: Maybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  id_contains?: Maybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: Maybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: Maybe<Array<Scalars['ID']>>;
+  /** All values that are not equal to given value. */
+  id_not?: Maybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: Maybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: Maybe<Scalars['ID']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: Maybe<Array<Scalars['ID']>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: Maybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: Maybe<Scalars['ID']>;
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: Maybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: Maybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: Maybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: Maybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: Maybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
+  publishedBy?: Maybe<UserWhereInput>;
+  scheduledIn_every?: Maybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: Maybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: Maybe<ScheduledOperationWhereInput>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: Maybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: Maybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: Maybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: Maybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  updatedAt_not?: Maybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: Maybe<Array<Scalars['DateTime']>>;
+  updatedBy?: Maybe<UserWhereInput>;
+};
+
+/** References Footer record uniquely */
+export type FooterWhereUniqueInput = {
+  id?: Maybe<Scalars['ID']>;
 };
 
 export type Home = Node & {
@@ -1299,6 +2063,10 @@ export type Mutation = {
    * @deprecated Asset mutations will be overhauled soon
    */
   createAsset?: Maybe<Asset>;
+  /** Create one contact */
+  createContact?: Maybe<Contact>;
+  /** Create one footer */
+  createFooter?: Maybe<Footer>;
   /** Create one home */
   createHome?: Maybe<Home>;
   /** Create one project */
@@ -1307,6 +2075,10 @@ export type Mutation = {
   createScheduledRelease?: Maybe<ScheduledRelease>;
   /** Delete one asset from _all_ existing stages. Returns deleted document. */
   deleteAsset?: Maybe<Asset>;
+  /** Delete one contact from _all_ existing stages. Returns deleted document. */
+  deleteContact?: Maybe<Contact>;
+  /** Delete one footer from _all_ existing stages. Returns deleted document. */
+  deleteFooter?: Maybe<Footer>;
   /** Delete one home from _all_ existing stages. Returns deleted document. */
   deleteHome?: Maybe<Home>;
   /**
@@ -1316,6 +2088,20 @@ export type Mutation = {
   deleteManyAssets: BatchPayload;
   /** Delete many Asset documents, return deleted documents */
   deleteManyAssetsConnection: AssetConnection;
+  /**
+   * Delete many Contact documents
+   * @deprecated Please use the new paginated many mutation (deleteManyContactsConnection)
+   */
+  deleteManyContacts: BatchPayload;
+  /** Delete many Contact documents, return deleted documents */
+  deleteManyContactsConnection: ContactConnection;
+  /**
+   * Delete many Footer documents
+   * @deprecated Please use the new paginated many mutation (deleteManyFootersConnection)
+   */
+  deleteManyFooters: BatchPayload;
+  /** Delete many Footer documents, return deleted documents */
+  deleteManyFootersConnection: FooterConnection;
   /**
    * Delete many Home documents
    * @deprecated Please use the new paginated many mutation (deleteManyHomesConnection)
@@ -1338,6 +2124,10 @@ export type Mutation = {
   deleteScheduledRelease?: Maybe<ScheduledRelease>;
   /** Publish one asset */
   publishAsset?: Maybe<Asset>;
+  /** Publish one contact */
+  publishContact?: Maybe<Contact>;
+  /** Publish one footer */
+  publishFooter?: Maybe<Footer>;
   /** Publish one home */
   publishHome?: Maybe<Home>;
   /**
@@ -1347,6 +2137,20 @@ export type Mutation = {
   publishManyAssets: BatchPayload;
   /** Publish many Asset documents */
   publishManyAssetsConnection: AssetConnection;
+  /**
+   * Publish many Contact documents
+   * @deprecated Please use the new paginated many mutation (publishManyContactsConnection)
+   */
+  publishManyContacts: BatchPayload;
+  /** Publish many Contact documents */
+  publishManyContactsConnection: ContactConnection;
+  /**
+   * Publish many Footer documents
+   * @deprecated Please use the new paginated many mutation (publishManyFootersConnection)
+   */
+  publishManyFooters: BatchPayload;
+  /** Publish many Footer documents */
+  publishManyFootersConnection: FooterConnection;
   /**
    * Publish many Home documents
    * @deprecated Please use the new paginated many mutation (publishManyHomesConnection)
@@ -1365,18 +2169,30 @@ export type Mutation = {
   publishProject?: Maybe<Project>;
   /** Schedule to publish one asset */
   schedulePublishAsset?: Maybe<Asset>;
+  /** Schedule to publish one contact */
+  schedulePublishContact?: Maybe<Contact>;
+  /** Schedule to publish one footer */
+  schedulePublishFooter?: Maybe<Footer>;
   /** Schedule to publish one home */
   schedulePublishHome?: Maybe<Home>;
   /** Schedule to publish one project */
   schedulePublishProject?: Maybe<Project>;
   /** Unpublish one asset from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishAsset?: Maybe<Asset>;
+  /** Unpublish one contact from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  scheduleUnpublishContact?: Maybe<Contact>;
+  /** Unpublish one footer from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  scheduleUnpublishFooter?: Maybe<Footer>;
   /** Unpublish one home from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishHome?: Maybe<Home>;
   /** Unpublish one project from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishProject?: Maybe<Project>;
   /** Unpublish one asset from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   unpublishAsset?: Maybe<Asset>;
+  /** Unpublish one contact from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  unpublishContact?: Maybe<Contact>;
+  /** Unpublish one footer from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  unpublishFooter?: Maybe<Footer>;
   /** Unpublish one home from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   unpublishHome?: Maybe<Home>;
   /**
@@ -1386,6 +2202,20 @@ export type Mutation = {
   unpublishManyAssets: BatchPayload;
   /** Find many Asset documents that match criteria in specified stage and unpublish from target stages */
   unpublishManyAssetsConnection: AssetConnection;
+  /**
+   * Unpublish many Contact documents
+   * @deprecated Please use the new paginated many mutation (unpublishManyContactsConnection)
+   */
+  unpublishManyContacts: BatchPayload;
+  /** Find many Contact documents that match criteria in specified stage and unpublish from target stages */
+  unpublishManyContactsConnection: ContactConnection;
+  /**
+   * Unpublish many Footer documents
+   * @deprecated Please use the new paginated many mutation (unpublishManyFootersConnection)
+   */
+  unpublishManyFooters: BatchPayload;
+  /** Find many Footer documents that match criteria in specified stage and unpublish from target stages */
+  unpublishManyFootersConnection: FooterConnection;
   /**
    * Unpublish many Home documents
    * @deprecated Please use the new paginated many mutation (unpublishManyHomesConnection)
@@ -1404,6 +2234,10 @@ export type Mutation = {
   unpublishProject?: Maybe<Project>;
   /** Update one asset */
   updateAsset?: Maybe<Asset>;
+  /** Update one contact */
+  updateContact?: Maybe<Contact>;
+  /** Update one footer */
+  updateFooter?: Maybe<Footer>;
   /** Update one home */
   updateHome?: Maybe<Home>;
   /**
@@ -1413,6 +2247,20 @@ export type Mutation = {
   updateManyAssets: BatchPayload;
   /** Update many Asset documents */
   updateManyAssetsConnection: AssetConnection;
+  /**
+   * Update many contacts
+   * @deprecated Please use the new paginated many mutation (updateManyContactsConnection)
+   */
+  updateManyContacts: BatchPayload;
+  /** Update many Contact documents */
+  updateManyContactsConnection: ContactConnection;
+  /**
+   * Update many footers
+   * @deprecated Please use the new paginated many mutation (updateManyFootersConnection)
+   */
+  updateManyFooters: BatchPayload;
+  /** Update many Footer documents */
+  updateManyFootersConnection: FooterConnection;
   /**
    * Update many homes
    * @deprecated Please use the new paginated many mutation (updateManyHomesConnection)
@@ -1433,6 +2281,10 @@ export type Mutation = {
   updateScheduledRelease?: Maybe<ScheduledRelease>;
   /** Upsert one asset */
   upsertAsset?: Maybe<Asset>;
+  /** Upsert one contact */
+  upsertContact?: Maybe<Contact>;
+  /** Upsert one footer */
+  upsertFooter?: Maybe<Footer>;
   /** Upsert one home */
   upsertHome?: Maybe<Home>;
   /** Upsert one project */
@@ -1442,6 +2294,16 @@ export type Mutation = {
 
 export type MutationCreateAssetArgs = {
   data: AssetCreateInput;
+};
+
+
+export type MutationCreateContactArgs = {
+  data: ContactCreateInput;
+};
+
+
+export type MutationCreateFooterArgs = {
+  data: FooterCreateInput;
 };
 
 
@@ -1465,6 +2327,16 @@ export type MutationDeleteAssetArgs = {
 };
 
 
+export type MutationDeleteContactArgs = {
+  where: ContactWhereUniqueInput;
+};
+
+
+export type MutationDeleteFooterArgs = {
+  where: FooterWhereUniqueInput;
+};
+
+
 export type MutationDeleteHomeArgs = {
   where: HomeWhereUniqueInput;
 };
@@ -1482,6 +2354,36 @@ export type MutationDeleteManyAssetsConnectionArgs = {
   last?: Maybe<Scalars['Int']>;
   skip?: Maybe<Scalars['Int']>;
   where?: Maybe<AssetManyWhereInput>;
+};
+
+
+export type MutationDeleteManyContactsArgs = {
+  where?: Maybe<ContactManyWhereInput>;
+};
+
+
+export type MutationDeleteManyContactsConnectionArgs = {
+  after?: Maybe<Scalars['ID']>;
+  before?: Maybe<Scalars['ID']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  skip?: Maybe<Scalars['Int']>;
+  where?: Maybe<ContactManyWhereInput>;
+};
+
+
+export type MutationDeleteManyFootersArgs = {
+  where?: Maybe<FooterManyWhereInput>;
+};
+
+
+export type MutationDeleteManyFootersConnectionArgs = {
+  after?: Maybe<Scalars['ID']>;
+  before?: Maybe<Scalars['ID']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  skip?: Maybe<Scalars['Int']>;
+  where?: Maybe<FooterManyWhereInput>;
 };
 
 
@@ -1539,6 +2441,18 @@ export type MutationPublishAssetArgs = {
 };
 
 
+export type MutationPublishContactArgs = {
+  to?: Array<Stage>;
+  where: ContactWhereUniqueInput;
+};
+
+
+export type MutationPublishFooterArgs = {
+  to?: Array<Stage>;
+  where: FooterWhereUniqueInput;
+};
+
+
 export type MutationPublishHomeArgs = {
   to?: Array<Stage>;
   where: HomeWhereUniqueInput;
@@ -1566,6 +2480,42 @@ export type MutationPublishManyAssetsConnectionArgs = {
   to?: Array<Stage>;
   where?: Maybe<AssetManyWhereInput>;
   withDefaultLocale?: Maybe<Scalars['Boolean']>;
+};
+
+
+export type MutationPublishManyContactsArgs = {
+  to?: Array<Stage>;
+  where?: Maybe<ContactManyWhereInput>;
+};
+
+
+export type MutationPublishManyContactsConnectionArgs = {
+  after?: Maybe<Scalars['ID']>;
+  before?: Maybe<Scalars['ID']>;
+  first?: Maybe<Scalars['Int']>;
+  from?: Maybe<Stage>;
+  last?: Maybe<Scalars['Int']>;
+  skip?: Maybe<Scalars['Int']>;
+  to?: Array<Stage>;
+  where?: Maybe<ContactManyWhereInput>;
+};
+
+
+export type MutationPublishManyFootersArgs = {
+  to?: Array<Stage>;
+  where?: Maybe<FooterManyWhereInput>;
+};
+
+
+export type MutationPublishManyFootersConnectionArgs = {
+  after?: Maybe<Scalars['ID']>;
+  before?: Maybe<Scalars['ID']>;
+  first?: Maybe<Scalars['Int']>;
+  from?: Maybe<Stage>;
+  last?: Maybe<Scalars['Int']>;
+  skip?: Maybe<Scalars['Int']>;
+  to?: Array<Stage>;
+  where?: Maybe<FooterManyWhereInput>;
 };
 
 
@@ -1622,6 +2572,22 @@ export type MutationSchedulePublishAssetArgs = {
 };
 
 
+export type MutationSchedulePublishContactArgs = {
+  releaseAt?: Maybe<Scalars['DateTime']>;
+  releaseId?: Maybe<Scalars['String']>;
+  to?: Array<Stage>;
+  where: ContactWhereUniqueInput;
+};
+
+
+export type MutationSchedulePublishFooterArgs = {
+  releaseAt?: Maybe<Scalars['DateTime']>;
+  releaseId?: Maybe<Scalars['String']>;
+  to?: Array<Stage>;
+  where: FooterWhereUniqueInput;
+};
+
+
 export type MutationSchedulePublishHomeArgs = {
   releaseAt?: Maybe<Scalars['DateTime']>;
   releaseId?: Maybe<Scalars['String']>;
@@ -1648,6 +2614,22 @@ export type MutationScheduleUnpublishAssetArgs = {
 };
 
 
+export type MutationScheduleUnpublishContactArgs = {
+  from?: Array<Stage>;
+  releaseAt?: Maybe<Scalars['DateTime']>;
+  releaseId?: Maybe<Scalars['String']>;
+  where: ContactWhereUniqueInput;
+};
+
+
+export type MutationScheduleUnpublishFooterArgs = {
+  from?: Array<Stage>;
+  releaseAt?: Maybe<Scalars['DateTime']>;
+  releaseId?: Maybe<Scalars['String']>;
+  where: FooterWhereUniqueInput;
+};
+
+
 export type MutationScheduleUnpublishHomeArgs = {
   from?: Array<Stage>;
   releaseAt?: Maybe<Scalars['DateTime']>;
@@ -1669,6 +2651,18 @@ export type MutationUnpublishAssetArgs = {
   locales?: Maybe<Array<Locale>>;
   unpublishBase?: Maybe<Scalars['Boolean']>;
   where: AssetWhereUniqueInput;
+};
+
+
+export type MutationUnpublishContactArgs = {
+  from?: Array<Stage>;
+  where: ContactWhereUniqueInput;
+};
+
+
+export type MutationUnpublishFooterArgs = {
+  from?: Array<Stage>;
+  where: FooterWhereUniqueInput;
 };
 
 
@@ -1697,6 +2691,42 @@ export type MutationUnpublishManyAssetsConnectionArgs = {
   stage?: Maybe<Stage>;
   unpublishBase?: Maybe<Scalars['Boolean']>;
   where?: Maybe<AssetManyWhereInput>;
+};
+
+
+export type MutationUnpublishManyContactsArgs = {
+  from?: Array<Stage>;
+  where?: Maybe<ContactManyWhereInput>;
+};
+
+
+export type MutationUnpublishManyContactsConnectionArgs = {
+  after?: Maybe<Scalars['ID']>;
+  before?: Maybe<Scalars['ID']>;
+  first?: Maybe<Scalars['Int']>;
+  from?: Array<Stage>;
+  last?: Maybe<Scalars['Int']>;
+  skip?: Maybe<Scalars['Int']>;
+  stage?: Maybe<Stage>;
+  where?: Maybe<ContactManyWhereInput>;
+};
+
+
+export type MutationUnpublishManyFootersArgs = {
+  from?: Array<Stage>;
+  where?: Maybe<FooterManyWhereInput>;
+};
+
+
+export type MutationUnpublishManyFootersConnectionArgs = {
+  after?: Maybe<Scalars['ID']>;
+  before?: Maybe<Scalars['ID']>;
+  first?: Maybe<Scalars['Int']>;
+  from?: Array<Stage>;
+  last?: Maybe<Scalars['Int']>;
+  skip?: Maybe<Scalars['Int']>;
+  stage?: Maybe<Stage>;
+  where?: Maybe<FooterManyWhereInput>;
 };
 
 
@@ -1748,6 +2778,18 @@ export type MutationUpdateAssetArgs = {
 };
 
 
+export type MutationUpdateContactArgs = {
+  data: ContactUpdateInput;
+  where: ContactWhereUniqueInput;
+};
+
+
+export type MutationUpdateFooterArgs = {
+  data: FooterUpdateInput;
+  where: FooterWhereUniqueInput;
+};
+
+
 export type MutationUpdateHomeArgs = {
   data: HomeUpdateInput;
   where: HomeWhereUniqueInput;
@@ -1768,6 +2810,40 @@ export type MutationUpdateManyAssetsConnectionArgs = {
   last?: Maybe<Scalars['Int']>;
   skip?: Maybe<Scalars['Int']>;
   where?: Maybe<AssetManyWhereInput>;
+};
+
+
+export type MutationUpdateManyContactsArgs = {
+  data: ContactUpdateManyInput;
+  where?: Maybe<ContactManyWhereInput>;
+};
+
+
+export type MutationUpdateManyContactsConnectionArgs = {
+  after?: Maybe<Scalars['ID']>;
+  before?: Maybe<Scalars['ID']>;
+  data: ContactUpdateManyInput;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  skip?: Maybe<Scalars['Int']>;
+  where?: Maybe<ContactManyWhereInput>;
+};
+
+
+export type MutationUpdateManyFootersArgs = {
+  data: FooterUpdateManyInput;
+  where?: Maybe<FooterManyWhereInput>;
+};
+
+
+export type MutationUpdateManyFootersConnectionArgs = {
+  after?: Maybe<Scalars['ID']>;
+  before?: Maybe<Scalars['ID']>;
+  data: FooterUpdateManyInput;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  skip?: Maybe<Scalars['Int']>;
+  where?: Maybe<FooterManyWhereInput>;
 };
 
 
@@ -1820,6 +2896,18 @@ export type MutationUpdateScheduledReleaseArgs = {
 export type MutationUpsertAssetArgs = {
   upsert: AssetUpsertInput;
   where: AssetWhereUniqueInput;
+};
+
+
+export type MutationUpsertContactArgs = {
+  upsert: ContactUpsertInput;
+  where: ContactWhereUniqueInput;
+};
+
+
+export type MutationUpsertFooterArgs = {
+  upsert: FooterUpsertInput;
+  where: FooterWhereUniqueInput;
 };
 
 
@@ -2422,6 +3510,22 @@ export type Query = {
   assets: Array<Asset>;
   /** Retrieve multiple assets using the Relay connection interface */
   assetsConnection: AssetConnection;
+  /** Retrieve a single contact */
+  contact?: Maybe<Contact>;
+  /** Retrieve document version */
+  contactVersion?: Maybe<DocumentVersion>;
+  /** Retrieve multiple contacts */
+  contacts: Array<Contact>;
+  /** Retrieve multiple contacts using the Relay connection interface */
+  contactsConnection: ContactConnection;
+  /** Retrieve a single footer */
+  footer?: Maybe<Footer>;
+  /** Retrieve document version */
+  footerVersion?: Maybe<DocumentVersion>;
+  /** Retrieve multiple footers */
+  footers: Array<Footer>;
+  /** Retrieve multiple footers using the Relay connection interface */
+  footersConnection: FooterConnection;
   /** Retrieve a single home */
   home?: Maybe<Home>;
   /** Retrieve document version */
@@ -2496,6 +3600,82 @@ export type QueryAssetsConnectionArgs = {
   skip?: Maybe<Scalars['Int']>;
   stage?: Stage;
   where?: Maybe<AssetWhereInput>;
+};
+
+
+export type QueryContactArgs = {
+  locales?: Array<Locale>;
+  stage?: Stage;
+  where: ContactWhereUniqueInput;
+};
+
+
+export type QueryContactVersionArgs = {
+  where: VersionWhereInput;
+};
+
+
+export type QueryContactsArgs = {
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  locales?: Array<Locale>;
+  orderBy?: Maybe<ContactOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  stage?: Stage;
+  where?: Maybe<ContactWhereInput>;
+};
+
+
+export type QueryContactsConnectionArgs = {
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  locales?: Array<Locale>;
+  orderBy?: Maybe<ContactOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  stage?: Stage;
+  where?: Maybe<ContactWhereInput>;
+};
+
+
+export type QueryFooterArgs = {
+  locales?: Array<Locale>;
+  stage?: Stage;
+  where: FooterWhereUniqueInput;
+};
+
+
+export type QueryFooterVersionArgs = {
+  where: VersionWhereInput;
+};
+
+
+export type QueryFootersArgs = {
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  locales?: Array<Locale>;
+  orderBy?: Maybe<FooterOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  stage?: Stage;
+  where?: Maybe<FooterWhereInput>;
+};
+
+
+export type QueryFootersConnectionArgs = {
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  locales?: Array<Locale>;
+  orderBy?: Maybe<FooterOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  stage?: Stage;
+  where?: Maybe<FooterWhereInput>;
 };
 
 
@@ -2787,7 +3967,7 @@ export type ScheduledOperationUpdatedByArgs = {
   locales?: Maybe<Array<Locale>>;
 };
 
-export type ScheduledOperationAffectedDocument = Asset | Home | Project;
+export type ScheduledOperationAffectedDocument = Asset | Contact | Footer | Home | Project;
 
 export type ScheduledOperationConnectInput = {
   /** Allow to specify document position in list of connected documents, will default to appending at end of list */
@@ -4175,12 +5355,46 @@ export enum _SystemDateTimeFieldVariation {
   Localization = 'localization'
 }
 
+export type GetContactContentQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetContactContentQuery = { __typename?: 'Query', contact?: { __typename?: 'Contact', id: string, getInTouch?: { __typename?: 'RichText', html: string } | null | undefined } | null | undefined, footer?: { __typename?: 'Footer', id: string, copy?: string | null | undefined, links: Array<{ __typename?: 'RichText', html: string }> } | null | undefined };
+
 export type GetContentQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetContentQuery = { __typename?: 'Query', home?: { __typename?: 'Home', heroText?: { __typename?: 'RichText', html: string } | null | undefined, heroVideo?: { __typename?: 'Asset', id: string, fileName: string, url: string } | null | undefined, smallText?: { __typename?: 'RichText', html: string } | null | undefined, mediumText?: { __typename?: 'RichText', html: string } | null | undefined, largeText?: { __typename?: 'RichText', html: string } | null | undefined, projects: Array<{ __typename?: 'Project', id: string, projectType?: ProjectType | null | undefined, title?: string | null | undefined, headline?: string | null | undefined, description?: string | null | undefined, tileImage?: { __typename?: 'Asset', id: string, fileName: string, url: string } | null | undefined, assets: Array<{ __typename?: 'Asset', id: string, fileName: string, url: string }> }> } | null | undefined };
+export type GetContentQuery = { __typename?: 'Query', home?: { __typename?: 'Home', heroText?: { __typename?: 'RichText', html: string } | null | undefined, heroVideo?: { __typename?: 'Asset', id: string, fileName: string, url: string } | null | undefined, smallText?: { __typename?: 'RichText', html: string } | null | undefined, mediumText?: { __typename?: 'RichText', html: string } | null | undefined, largeText?: { __typename?: 'RichText', html: string } | null | undefined, projects: Array<{ __typename?: 'Project', id: string, projectType?: ProjectType | null | undefined, title?: string | null | undefined, headline?: string | null | undefined, description?: string | null | undefined, tileImage?: { __typename?: 'Asset', id: string, fileName: string, url: string } | null | undefined, assets: Array<{ __typename?: 'Asset', id: string, fileName: string, url: string }> }> } | null | undefined, footer?: { __typename?: 'Footer', id: string, copy?: string | null | undefined, links: Array<{ __typename?: 'RichText', html: string }> } | null | undefined };
 
 
+export const GetContactContentDocument = `
+    query GetContactContent {
+  contact(where: {id: "ckwzn69b40kev0d829unc461i"}) {
+    id
+    getInTouch {
+      html
+    }
+  }
+  footer(where: {id: "ckwzngz40084f0b86mibziygp"}) {
+    id
+    copy
+    links {
+      html
+    }
+  }
+}
+    `;
+export const useGetContactContentQuery = <
+      TData = GetContactContentQuery,
+      TError = unknown
+    >(
+      variables?: GetContactContentQueryVariables,
+      options?: UseQueryOptions<GetContactContentQuery, TError, TData>
+    ) =>
+    useQuery<GetContactContentQuery, TError, TData>(
+      variables === undefined ? ['GetContactContent'] : ['GetContactContent', variables],
+      fetcher<GetContactContentQuery, GetContactContentQueryVariables>(GetContactContentDocument, variables),
+      options
+    );
 export const GetContentDocument = `
     query GetContent {
   home(where: {id: "ckwwvtah41ajn0b879604sx4k"}) {
@@ -4217,6 +5431,13 @@ export const GetContentDocument = `
         fileName
         url
       }
+    }
+  }
+  footer(where: {id: "ckwzngz40084f0b86mibziygp"}) {
+    id
+    copy
+    links {
+      html
     }
   }
 }

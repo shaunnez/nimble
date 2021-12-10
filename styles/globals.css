@@ -99,8 +99,23 @@ footer {
   color: white;
   font-size: 24px;
   line-height: 29px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
+footer div {
+  margin-right: 8px;
+}
+
+footer div a {
+  text-decoration: underline;
+}
+
+footer div a:hover,
+footer div a:focus {
+  text-decoration: none;
+}
 main {
 }
 

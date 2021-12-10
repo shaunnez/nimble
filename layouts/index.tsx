@@ -1,6 +1,5 @@
 import Head from "next/head";
 import Header from "components/header";
-import Footer from "components/footer";
 import { ReactChildren } from "react";
 
 interface LayoutProps {
@@ -17,7 +16,6 @@ export default function Layout({ children }: LayoutProps) {
       </Head>
       <Header />
       <main>{children}</main>
-      <Footer />
     </>
   );
 }

@@ -4,9 +4,10 @@ import ReactPlayer from "react-player";
 import { GraphQLClient } from "graphql-request";
 import React, { useEffect, useState } from "react";
 import Carousel from "nuka-carousel";
-import styles from "./index.module.css";
 import Link from "next/link";
 import Image from "next/image";
+import Footer from "components/footer";
+import styles from "./index.module.css";
 
 const client = new GraphQLClient(
   "https://api-ap-southeast-2.graphcms.com/v2/ckwwvc5mz82wk01z1bsq3f9ko/master"
@@ -34,84 +35,87 @@ function Home({ data }: InferGetStaticPropsType<typeof getStaticProps>) {
   };
 
   return (
-    <div className={styles.home}>
-      <div className={styles.hero}>
-        <div className={styles.playerWrapper}>
-          <ReactPlayer
-            className={styles.reactPlayer}
-            url={data.home?.heroVideo?.url}
-            controls={true}
-            width="100%"
-            height="100%"
+    <>
+      <div className={styles.home}>
+        <div className={styles.hero}>
+          <div className={styles.playerWrapper}>
+            <ReactPlayer
+              className={styles.reactPlayer}
+              url={data.home?.heroVideo?.url}
+              controls={true}
+              width="100%"
+              height="100%"
+            />
+          </div>
+        </div>
+        <div className={styles.content}>
+          <div
+            className={styles.heroContent}
+            dangerouslySetInnerHTML={{ __html: data?.home?.heroText?.html }}
           />
+
+          {sections.map((section) => {
+            const projects = data?.home?.projects.filter(
+              (project) => project.projectType === section
+            );
+
+            return (
+              <div className={styles.section} key={section}>
+                <h3>
+                  <span>{section.charAt(0)}</span>
+                  <label>{section}</label>
+                </h3>
+                <div
+                  className={styles.sectionContent}
+                  dangerouslySetInnerHTML={{
+                    __html: data?.home[`${section}Text`].html,
+                  }}
+                />
+
+                <div className={styles.mobileFullView}>
+                  {selectedProjectIdx > -1 && selectedSection === section ? (
+                    <FullView
+                      selectedProject={selectedProject}
+                      setProject={setProject}
+                      isMobile={true}
+                    />
+                  ) : null}
+                </div>
+                <div className={styles.projects}>
+                  {projects?.map((project, index) => {
+                    let showFullView = false;
+                    if (selectedProjectIdx > -1) {
+                      const min = index - (index % 3);
+                      const max = min + 3;
+                      showFullView =
+                        selectedProjectIdx >= min && selectedProjectIdx < max;
+                    }
+                    return (
+                      <React.Fragment key={project.id}>
+                        {showFullView && index % 3 === 0 ? (
+                          <FullView
+                            selectedProject={selectedProject}
+                            setProject={setProject}
+                            isMobile={false}
+                          />
+                        ) : null}
+                        <Project
+                          project={project}
+                          index={index}
+                          section={section}
+                          setProject={setProject}
+                        />
+                      </React.Fragment>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
-      <div className={styles.content}>
-        <div
-          className={styles.heroContent}
-          dangerouslySetInnerHTML={{ __html: data?.home?.heroText?.html }}
-        />
-
-        {sections.map((section) => {
-          const projects = data?.home?.projects.filter(
-            (project) => project.projectType === section
-          );
-
-          return (
-            <div className={styles.section} key={section}>
-              <h3>
-                <span>{section.charAt(0)}</span>
-                <label>{section}</label>
-              </h3>
-              <div
-                className={styles.sectionContent}
-                dangerouslySetInnerHTML={{
-                  __html: data?.home[`${section}Text`].html,
-                }}
-              />
-
-              <div className={styles.mobileFullView}>
-                {selectedProjectIdx > -1 && selectedSection === section ? (
-                  <FullView
-                    selectedProject={selectedProject}
-                    setProject={setProject}
-                    isMobile={true}
-                  />
-                ) : null}
-              </div>
-              <div className={styles.projects}>
-                {projects?.map((project, index) => {
-                  let showFullView = false;
-                  if (selectedProjectIdx > -1) {
-                    const min = index - (index % 3);
-                    const max = min + 3;
-                    showFullView =
-                      selectedProjectIdx >= min && selectedProjectIdx < max;
-                  }
-                  return (
-                    <React.Fragment key={project.id}>
-                      {showFullView && index % 3 === 0 ? (
-                        <FullView
-                          selectedProject={selectedProject}
-                          setProject={setProject}
-                          isMobile={false}
-                        />
-                      ) : null}
-                      <Project
-                        project={project}
-                        index={index}
-                        section={section}
-                        setProject={setProject}
-                      />
-                    </React.Fragment>
-                  );
-                })}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
+      <Footer footerContent={data.footer} />
+    </>
   );
 }
 

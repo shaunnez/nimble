@@ -44,16 +44,15 @@
 
 .content {
   width: 228px;
-  flex-grow: 0;
-  margin-left: 346px;
 }
 
 .content p {
   font-size: 17px;
   line-height: 21px;
+  min-height: 21px;
+  margin: 0;
 }
 .spacer {
-  flex-grow: 1;
 }
 
 .form button {

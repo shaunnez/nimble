@@ -35,4 +35,11 @@ query GetContent {
       }
     }
   }
+  footer(where: { id: "ckwzngz40084f0b86mibziygp" }) {
+    id
+    copy
+    links {
+      html
+    }
+  }
 }
