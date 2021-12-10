@@ -77,7 +77,7 @@
   position: relative;
 }
 
-.projects .project:hover svg {
+.projects .project:hover {
   transform: scale(1.05);
   z-index: 1;
 }
