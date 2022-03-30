@@ -1,9 +1,4 @@
-import {
-  GetContactContentDocument,
-  GetContactContentQuery,
-  GetContentDocument,
-  GetContentQuery,
-} from "generated";
+import { GetContentDocument, GetContentQuery } from "generated";
 import type { InferGetStaticPropsType } from "next";
 import ReactPlayer from "react-player";
 import { GraphQLClient } from "graphql-request";
