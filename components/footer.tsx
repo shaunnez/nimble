@@ -1,6 +1,5 @@
 import Image from "next/image";
 import React, { useState } from "react";
-import Contact from "./contact";
 
 import styles from "./footer.module.css";
 
