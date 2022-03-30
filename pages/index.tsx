@@ -1,4 +1,9 @@
-import { GetContentDocument, GetContentQuery } from "generated";
+import {
+  GetContactContentDocument,
+  GetContactContentQuery,
+  GetContentDocument,
+  GetContentQuery,
+} from "generated";
 import type { InferGetStaticPropsType } from "next";
 import ReactPlayer from "react-player";
 import { GraphQLClient } from "graphql-request";
@@ -23,10 +28,12 @@ export const getStaticProps = async () => {
 };
 
 function Home({ data }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const sections = ["small", "medium", "large"];
+  console.log(data);
+  const sections = ["small", "medium", "large", "xLarge"];
   const [selectedProject, setSelectedProject] = useState(null as any);
   const [selectedProjectIdx, setSelectedProjectIdx] = useState(-1 as number);
   const [selectedSection, setSelectedSection] = useState("");
+  const [sectionOpen, setSectionOpen] = useState("");
 
   const setProject = (project: any, index: number, section: string) => {
     setSelectedProject(project);
@@ -60,100 +67,113 @@ function Home({ data }: InferGetStaticPropsType<typeof getStaticProps>) {
             );
 
             return (
-              <div className={styles.section} key={section}>
-                <h3>
-                  <span>{section.charAt(0)}</span>
-                  <label>{section}</label>
-                </h3>
-                <div
-                  className={styles.sectionContent}
-                  dangerouslySetInnerHTML={{
-                    __html: data?.home[`${section}Text`].html,
-                  }}
-                />
+              <div id={section} className={styles.section} key={section}>
+                <div className={styles.sectionSummary}>
+                  <h3>
+                    <span>
+                      {section === "xLarge" ? "XL" : section.charAt(0)}
+                    </span>
+                  </h3>
 
-                <div className={styles.mobileFullView}>
-                  {selectedProjectIdx > -1 && selectedSection === section ? (
+                  <div className={styles.sectionContent}>
+                    <label>{section === "xLarge" ? "X-Large" : section}</label>
+
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: data?.home[`${section}Text`]?.html,
+                      }}
+                    />
+                  </div>
+                  <a
+                    href="#"
+                    className={`sectionArrow ${styles.sectionArrow} ${
+                      selectedSection === section ? styles.open : styles.closed
+                    }`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (section === selectedSection) {
+                        setSelectedSection("");
+                      } else {
+                        setSelectedSection(section);
+                      }
+                    }}
+                  >
+                    <svg
+                      width="48"
+                      height="48"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M6.34317 7.75732L4.92896 9.17154L12 16.2426L19.0711 9.17157L17.6569 7.75735L12 13.4142L6.34317 7.75732Z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </a>
+                </div>
+
+                {selectedSection === section && (
+                  <div className={styles.projects}>
+                    {projects?.map((project, index) => {
+                      return (
+                        <div
+                          className={styles.project}
+                          key={project.id}
+                          style={{
+                            marginRight:
+                              index === projects.length - 1 ? "0px" : null,
+                          }}
+                        >
+                          <div className={styles.projectHeader}>
+                            <div className={styles.projectTitle}>
+                              {project.headline}
+                            </div>
+                            <div className={styles.projectSubTitle}>
+                              {project.headline}
+                            </div>
+                          </div>
+                          <div className={styles.projectDescription}>
+                            {project.description}
+                          </div>
+                          <a
+                            href="#"
+                            className={styles.projectImage}
+                            style={{
+                              backgroundImage: `url(${project.tileImage?.url})`,
+                            }}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              if (selectedProject === project) {
+                                setSelectedProject("");
+                              } else {
+                                setSelectedProject(project);
+                              }
+                            }}
+                          />
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+                {selectedProject && selectedSection === section && (
+                  <div className={styles.selectedProject}>
                     <FullView
                       selectedProject={selectedProject}
                       setProject={setProject}
-                      isMobile={true}
+                      isMobile={false}
                     />
-                  ) : null}
-                </div>
-                <div className={styles.projects}>
-                  {projects?.map((project, index) => {
-                    let showFullView = false;
-                    if (selectedProjectIdx > -1) {
-                      const min = index - (index % 3);
-                      const max = min + 3;
-                      showFullView =
-                        selectedProjectIdx >= min && selectedProjectIdx < max;
-                    }
-                    return (
-                      <React.Fragment key={project.id}>
-                        {showFullView && index % 3 === 0 ? (
-                          <FullView
-                            selectedProject={selectedProject}
-                            setProject={setProject}
-                            isMobile={false}
-                          />
-                        ) : null}
-                        <Project
-                          project={project}
-                          index={index}
-                          section={section}
-                          setProject={setProject}
-                        />
-                      </React.Fragment>
-                    );
-                  })}
-                </div>
+                  </div>
+                )}
               </div>
             );
           })}
         </div>
       </div>
-      <Footer footerContent={data.footer} />
+      <Footer footerData={data?.contact?.getInTouch?.html} />
     </>
   );
 }
-
-const Project = ({ project, setProject, section, index }: any) => {
-  return (
-    <div
-      className={styles.project}
-      key={project.id}
-      style={{
-        backgroundImage: `url(${project.tileImage?.url})`,
-      }}
-    >
-      <div className={styles.projectTitle}>{project.title}</div>
-
-      <div className={styles.projectDescription}>
-        {project.description?.split(" ").slice(0, 10).join(" ")}
-        ... Read more
-      </div>
-
-      <a
-        href="#"
-        onClick={(e) => {
-          e.preventDefault();
-          setProject(project, index, section);
-          setTimeout(() => {
-            const selector = `#fullView${
-              window.innerWidth < 768 ? "Mobile" : ""
-            }`;
-            document.querySelector(selector).scrollIntoView({
-              block: "start",
-              behavior: "smooth",
-            });
-          }, 0);
-        }}
-      />
-    </div>
-  );
-};
 
 const FullView = ({ selectedProject, setProject, isMobile }: any) => {
   return (
@@ -200,19 +220,6 @@ const FullView = ({ selectedProject, setProject, isMobile }: any) => {
           );
         })}
       </Carousel>
-      <div className={styles.fullViewContent}>
-        <div className={styles.projectTitle}>
-          <label>{selectedProject.title}</label>
-
-          <Link href="/contact" passHref={true}>
-            <button>Tell us about your project</button>
-          </Link>
-        </div>
-        <div className={styles.projectHeadline}>{selectedProject.headline}</div>
-        <div className={styles.projectDescription}>
-          {selectedProject.description}
-        </div>
-      </div>
     </div>
   );
 };

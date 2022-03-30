@@ -9,9 +9,9 @@ type Data = {
 };
 
 type FormData = {
+  projectSize: string;
   name: string;
   email: string;
-  budget: number;
   phone: number;
 };
 
@@ -41,9 +41,9 @@ export default function handler(
     ],
     templateId: 3,
     params: {
+      PROJECTSIZE: data.projectSize,
       NAME: data.name,
       EMAIL: data.email,
-      BUDGET: data.budget,
       PHONE: data.phone,
     },
   };

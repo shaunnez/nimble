@@ -1,5 +1,5 @@
 .home {
-  margin-top: 105px;
+  margin-top: 48px;
 }
 
 .hero {
@@ -10,7 +10,7 @@
 
 .playerWrapper {
   position: relative;
-  padding-top: calc(766 / 1688 * 100%);
+  padding-top: calc(674 / 1200 * 100%);
   border-radius: 10px;
   background: var(--black);
 }
@@ -21,128 +21,165 @@
   left: 0;
 }
 
+.heroContent {
+  margin-top: 64px;
+  padding-left: 138px;
+}
+
 .content {
   margin-top: 10px;
 }
-.content p {
-  margin-top: 40px;
-}
+
 .section {
   margin-top: 90px;
 }
 
-.section h3 {
+.sectionSummary {
   display: flex;
-  align-items: center;
-  font-size: 60px;
-  line-height: 1;
-  margin: 0;
+  align-items: flex-start;
+  justify-content: flex-start;
+  position: relative;
 }
 
-.section h3 span {
+.sectionSummary a {
+  position: absolute;
+  right: 0;
+  top: calc(50% - 48px);
+  transition: all 0.25s ease-in-out;
+}
+
+.sectionSummary a:hover,
+.sectoinSummary a:focus {
+  opacity: 0.6;
+}
+
+.sectionSummary svg {
+  height: 64px;
+  width: 64px;
+}
+
+.sectionArrow.open {
+  transform: rotate(180deg);
+}
+
+.section h3 {
   background: white;
   border-radius: 100%;
   text-transform: uppercase;
   color: var(--blue);
-  width: 44px;
-  height: 44px;
+  width: 88px;
+  height: 88px;
+  flex-shrink: 0;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 24px;
-  font-size: 21px;
-  line-height: 1;
+  margin-right: 50px;
+  font-size: 36px;
+  line-height: 46px;
+  font-weight: 700;
+  margin-top: 0;
 }
 
 .section h3 {
   text-transform: capitalize;
 }
 
-.section > div {
-  padding-top: 16px;
-}
-.section > div p:first-child {
-  margin-top: 0px;
-}
-
 .sectionContent {
-  max-width: 1071px;
+  max-width: 60%;
 }
 
-.projects {
-  margin: -12.5px;
-  display: flex;
-  flex-wrap: wrap;
-  position: relative;
-}
-
-.projects .project:hover {
-  transform: scale(1.05);
-  z-index: 1;
-}
-
-.projects .projectDescription {
-  display: none;
-}
-.projects .project:hover .projectDescription {
+.sectionContent label {
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: capitalize;
+  line-height: 22px;
+  margin-bottom: 6px;
   display: block;
 }
 
+.sectionContent p {
+  font-size: 16px;
+  line-height: 20px;
+  margin: 0;
+  font-weight: 400;
+}
+
+.projects {
+  display: flex;
+  overflow: auto;
+  flex-wrap: nowrap;
+  padding-bottom: 16px;
+  padding-right: 4px;
+  margin-top: 16px;
+}
+
 .project {
-  margin: 12.5px;
-  width: calc(33.33% - 25px);
-  height: 362px;
+  width: 32%;
   flex-shrink: 0;
-  flex-grow: 0;
-  background: var(--grey-dark);
-  padding: 20px 30px;
-  transition: all 0.25s ease-in-out;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  margin-right: 16px;
+  padding: 8px;
   position: relative;
-  background-size: cover;
-  background-repeat: no-repeat;
+  height: 200px;
+  overflow: hidden;
 }
 
-.projectTitle {
-  font-size: 36px;
-  line-height: 46px;
+.project:last-child {
+  margin-right: 0px !important;
 }
 
-.projectHeadline {
-  font-size: 30px;
-  line-height: 38px;
-  font-weight: bold;
+.projectHeader {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  font-weight: 400;
 }
 
 .projectDescription {
-  font-size: 24px;
-  line-height: 29px;
+  margin-top: 30px;
+  font-size: 12px;
+  height: 65%;
   overflow: hidden;
-  text-overflow: ellipsis;
 }
 
-.projects .projectDescription {
-  margin-top: 34px;
-}
-.project a {
+.projectImage {
   position: absolute;
+  z-index: 1;
   top: 0;
   left: 0;
-  bottom: 0;
-  right: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: black;
+  background-position: center;
+  transition: opacity 0.25s ease-in-out;
+}
+
+.projectImage:hover,
+.projectImage:active,
+.projectImage:active {
+  opacity: 0;
+}
+
+.selectedProject {
+  position: relative;
+  margin-top: 30px;
+  width: 100%;
 }
 
 .fullView {
-  margin-left: 12.5px;
-  margin-right: 12.5px;
-  width: calc(100% - 25px);
-  padding-top: 26px;
+  width: 100%;
   margin-bottom: 75px;
 }
 
 .fullView > section {
   padding-top: calc(766 / 1688 * 100%);
 }
+
 .projectReactPlayer {
   width: 100%;
   height: 100%;
@@ -166,32 +203,15 @@
   transform: scale(2);
 }
 
-.fullViewContent {
-  margin-top: 40px;
-}
-
-.fullViewContent .projectTitle {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 18px;
-}
-
-.fullViewContent .projectHeadline {
-  margin-bottom: 18px;
-}
-
-.fullViewContent .projectDescription {
-  max-width: 1071px;
-}
-
 .closeButton {
   position: absolute;
-  top: 40px;
-  right: 40px;
+  top: 32px;
+  right: 32px;
   z-index: 4;
   border: none;
   transition: all 0.25s ease-in-out;
+  width: 32px;
+  height: 32px;
 }
 
 .closeButton:hover {
@@ -199,126 +219,28 @@
   opacity: 0.5;
 }
 
-.mobileFullView {
-  display: none !important;
-}
-
 @media screen and (max-width: 768px) {
-  .home {
-    margin-top: 36px;
-  }
-  .content {
-    margin-top: 0px;
-  }
-  .content p {
-    margin-top: 30px;
-  }
-  .playerWrapper {
-    padding-top: calc(154 / 341 * 100%);
+  .heroContent {
+    padding-left: 0;
   }
 
-  .section {
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-  }
-  .section h3 {
-    display: flex;
-    align-items: center;
-    font-size: 28px;
-    order: 1;
-  }
-
-  .section h3 span {
+  .sectionSummary h3 {
+    width: 44px;
+    height: 44px;
     font-size: 18px;
+    margin-right: 16px;
   }
 
   .sectionContent {
-    order: 2;
-  }
-  .mobileFullView {
-    display: block !important;
-    order: 0;
-    padding-top: 0px !important;
-    margin-left: -20px;
-    margin-right: -20px;
+    margin-right: 80px;
+    width: 100%;
   }
 
-  .mobileFullView .fullView {
-    padding-top: 0px;
-  }
-
-  .mobileFullView .fullView > section {
-    padding-top: 0;
-    height: 218px !important;
-  }
-
-  .mobileFullView .fullView .fullViewContent {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-  .projects {
-    margin: 0;
-    width: calc(100% + 40px);
-    flex-wrap: nowrap;
-    overflow: auto;
-    margin: 0px -20px;
-    order: 1;
-    padding-bottom: 16px;
-  }
-
-  .projects .fullView {
-    display: none !important;
-  }
   .project {
-    width: 100%;
-    margin-left: 0;
-    margin-right: 0;
-    height: 149px;
-    width: 149px;
-    margin: 0px 10px;
-    padding: 12px 8px;
-    flex-basis: 40%;
-    flex-grow: 1;
-    max-width: 50%;
+    width: 50%;
   }
 
-  .projects .project:hover {
-    transform: none;
-  }
-  .projects .project:hover .projectDescription {
-    display: none;
-  }
-
-  .projectTitle {
-    font-size: 16px;
-    line-height: 19px;
-  }
-
-  .projectHeadline {
-    font-size: 14px;
-    line-height: 17px;
-    font-weight: normal;
-  }
-
-  .projectDescription {
-    font-size: 12px;
-    line-height: 15px;
-  }
-  .fullView {
-    margin-left: 0;
-    margin-right: 0;
-    width: 100%;
-  }
-
-  .fullViewContent .projectTitle {
-    margin-bottom: 0;
-  }
-
-  .closeButton {
-    top: 8px;
-    right: 8px;
-    height: 18px;
-    width: 18px;
+  .fullView > section {
+    padding-top: 500px;
   }
 }

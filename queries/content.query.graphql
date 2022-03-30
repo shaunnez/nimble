@@ -17,6 +17,9 @@ query GetContent {
     largeText {
       html
     }
+    xLargeText {
+      html
+    }
     projects {
       id
       projectType
@@ -35,10 +38,9 @@ query GetContent {
       }
     }
   }
-  footer(where: { id: "ckwzngz40084f0b86mibziygp" }) {
+  contact(where: { id: "ckwzn69b40kev0d829unc461i" }) {
     id
-    copy
-    links {
+    getInTouch {
       html
     }
   }

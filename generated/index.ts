@@ -1630,6 +1630,7 @@ export type Home = Node & {
   updatedAt: Scalars['DateTime'];
   /** User that last updated this document */
   updatedBy?: Maybe<User>;
+  xLargeText?: Maybe<RichText>;
 };
 
 
@@ -1715,6 +1716,7 @@ export type HomeCreateInput = {
   projects?: Maybe<ProjectCreateManyInlineInput>;
   smallText?: Maybe<Scalars['RichTextAST']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
+  xLargeText?: Maybe<Scalars['RichTextAST']>;
 };
 
 export type HomeCreateManyInlineInput = {
@@ -1844,6 +1846,7 @@ export type HomeUpdateInput = {
   mediumText?: Maybe<Scalars['RichTextAST']>;
   projects?: Maybe<ProjectUpdateManyInlineInput>;
   smallText?: Maybe<Scalars['RichTextAST']>;
+  xLargeText?: Maybe<Scalars['RichTextAST']>;
 };
 
 export type HomeUpdateManyInlineInput = {
@@ -1868,6 +1871,7 @@ export type HomeUpdateManyInput = {
   largeText?: Maybe<Scalars['RichTextAST']>;
   mediumText?: Maybe<Scalars['RichTextAST']>;
   smallText?: Maybe<Scalars['RichTextAST']>;
+  xLargeText?: Maybe<Scalars['RichTextAST']>;
 };
 
 export type HomeUpdateManyWithNestedWhereInput = {
@@ -3258,7 +3262,8 @@ export enum ProjectOrderByInput {
 export enum ProjectType {
   Large = 'large',
   Medium = 'medium',
-  Small = 'small'
+  Small = 'small',
+  Xlarge = 'xlarge'
 }
 
 export type ProjectUpdateInput = {
@@ -5322,6 +5327,8 @@ export enum _MutationKind {
   DeleteMany = 'deleteMany',
   Publish = 'publish',
   PublishMany = 'publishMany',
+  SchedulePublish = 'schedulePublish',
+  ScheduleUnpublish = 'scheduleUnpublish',
   Unpublish = 'unpublish',
   UnpublishMany = 'unpublishMany',
   Update = 'update',
@@ -5355,46 +5362,12 @@ export enum _SystemDateTimeFieldVariation {
   Localization = 'localization'
 }
 
-export type GetContactContentQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetContactContentQuery = { __typename?: 'Query', contact?: { __typename?: 'Contact', id: string, getInTouch?: { __typename?: 'RichText', html: string } | null | undefined } | null | undefined, footer?: { __typename?: 'Footer', id: string, copy?: string | null | undefined, links: Array<{ __typename?: 'RichText', html: string }> } | null | undefined };
-
 export type GetContentQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetContentQuery = { __typename?: 'Query', home?: { __typename?: 'Home', heroText?: { __typename?: 'RichText', html: string } | null | undefined, heroVideo?: { __typename?: 'Asset', id: string, fileName: string, url: string } | null | undefined, smallText?: { __typename?: 'RichText', html: string } | null | undefined, mediumText?: { __typename?: 'RichText', html: string } | null | undefined, largeText?: { __typename?: 'RichText', html: string } | null | undefined, projects: Array<{ __typename?: 'Project', id: string, projectType?: ProjectType | null | undefined, title?: string | null | undefined, headline?: string | null | undefined, description?: string | null | undefined, tileImage?: { __typename?: 'Asset', id: string, fileName: string, url: string } | null | undefined, assets: Array<{ __typename?: 'Asset', id: string, fileName: string, url: string }> }> } | null | undefined, footer?: { __typename?: 'Footer', id: string, copy?: string | null | undefined, links: Array<{ __typename?: 'RichText', html: string }> } | null | undefined };
+export type GetContentQuery = { __typename?: 'Query', home?: { __typename?: 'Home', heroText?: { __typename?: 'RichText', html: string } | null | undefined, heroVideo?: { __typename?: 'Asset', id: string, fileName: string, url: string } | null | undefined, smallText?: { __typename?: 'RichText', html: string } | null | undefined, mediumText?: { __typename?: 'RichText', html: string } | null | undefined, largeText?: { __typename?: 'RichText', html: string } | null | undefined, xLargeText?: { __typename?: 'RichText', html: string } | null | undefined, projects: Array<{ __typename?: 'Project', id: string, projectType?: ProjectType | null | undefined, title?: string | null | undefined, headline?: string | null | undefined, description?: string | null | undefined, tileImage?: { __typename?: 'Asset', id: string, fileName: string, url: string } | null | undefined, assets: Array<{ __typename?: 'Asset', id: string, fileName: string, url: string }> }> } | null | undefined, contact?: { __typename?: 'Contact', id: string, getInTouch?: { __typename?: 'RichText', html: string } | null | undefined } | null | undefined };
 
 
-export const GetContactContentDocument = `
-    query GetContactContent {
-  contact(where: {id: "ckwzn69b40kev0d829unc461i"}) {
-    id
-    getInTouch {
-      html
-    }
-  }
-  footer(where: {id: "ckwzngz40084f0b86mibziygp"}) {
-    id
-    copy
-    links {
-      html
-    }
-  }
-}
-    `;
-export const useGetContactContentQuery = <
-      TData = GetContactContentQuery,
-      TError = unknown
-    >(
-      variables?: GetContactContentQueryVariables,
-      options?: UseQueryOptions<GetContactContentQuery, TError, TData>
-    ) =>
-    useQuery<GetContactContentQuery, TError, TData>(
-      variables === undefined ? ['GetContactContent'] : ['GetContactContent', variables],
-      fetcher<GetContactContentQuery, GetContactContentQueryVariables>(GetContactContentDocument, variables),
-      options
-    );
 export const GetContentDocument = `
     query GetContent {
   home(where: {id: "ckwwvtah41ajn0b879604sx4k"}) {
@@ -5415,6 +5388,9 @@ export const GetContentDocument = `
     largeText {
       html
     }
+    xLargeText {
+      html
+    }
     projects {
       id
       projectType
@@ -5433,10 +5409,9 @@ export const GetContentDocument = `
       }
     }
   }
-  footer(where: {id: "ckwzngz40084f0b86mibziygp"}) {
+  contact(where: {id: "ckwzn69b40kev0d829unc461i"}) {
     id
-    copy
-    links {
+    getInTouch {
       html
     }
   }

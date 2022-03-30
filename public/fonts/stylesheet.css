@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'MarkOT';
+    src: url('MarkOT.eot');
+    src: url('MarkOT.eot?#iefix') format('embedded-opentype'),
+        url('MarkOT.woff2') format('woff2'),
+        url('MarkOT.woff') format('woff'),
+        url('MarkOT.ttf') format('truetype'),
+        url('MarkOT.svg#MarkOT') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
