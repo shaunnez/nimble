@@ -200,7 +200,7 @@ const FullView = ({ selectedProject, setProject, isMobile }: any) => {
                 className={styles.closeButton}
                 onClick={(e) => {
                   e.preventDefault();
-                  setProject(null, -1, "");
+                  setProject("");
                 }}
               >
                 <Image src="/close.svg" alt="Close" layout={"fill"} />
