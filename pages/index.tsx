@@ -23,7 +23,6 @@ export const getStaticProps = async () => {
 };
 
 function Home({ data }: InferGetStaticPropsType<typeof getStaticProps>) {
-  console.log(data);
   const sections = ["small", "medium", "large", "xLarge"];
   const [selectedProject, setSelectedProject] = useState(null as any);
   const [selectedProjectIdx, setSelectedProjectIdx] = useState(-1 as number);
@@ -58,7 +57,7 @@ function Home({ data }: InferGetStaticPropsType<typeof getStaticProps>) {
 
           {sections.map((section) => {
             const projects = data?.home?.projects.filter(
-              (project) => project.projectType === section
+              (project) => project.projectType === section.toLowerCase()
             );
 
             return (
@@ -86,6 +85,7 @@ function Home({ data }: InferGetStaticPropsType<typeof getStaticProps>) {
                     }`}
                     onClick={(e) => {
                       e.preventDefault();
+                      setSelectedProject("");
                       if (section === selectedSection) {
                         setSelectedSection("");
                       } else {
