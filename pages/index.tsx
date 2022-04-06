@@ -25,13 +25,10 @@ export const getStaticProps = async () => {
 function Home({ data }: InferGetStaticPropsType<typeof getStaticProps>) {
   const sections = ["small", "medium", "large", "xLarge"];
   const [selectedProject, setSelectedProject] = useState(null as any);
-  const [selectedProjectIdx, setSelectedProjectIdx] = useState(-1 as number);
   const [selectedSection, setSelectedSection] = useState("");
-  const [sectionOpen, setSectionOpen] = useState("");
 
-  const setProject = (project: any, index: number, section: string) => {
+  const setProject = (project: any, section: string) => {
     setSelectedProject(project);
-    setSelectedProjectIdx(index);
     setSelectedSection(section);
   };
 
@@ -62,7 +59,17 @@ function Home({ data }: InferGetStaticPropsType<typeof getStaticProps>) {
 
             return (
               <div id={section} className={styles.section} key={section}>
-                <div className={styles.sectionSummary}>
+                <div
+                  className={styles.sectionSummary}
+                  onClick={(e) => {
+                    setSelectedProject("");
+                    if (section === selectedSection) {
+                      setSelectedSection("");
+                    } else {
+                      setSelectedSection(section);
+                    }
+                  }}
+                >
                   <h3>
                     <span>
                       {section === "xLarge" ? "XL" : section.charAt(0)}
@@ -85,12 +92,6 @@ function Home({ data }: InferGetStaticPropsType<typeof getStaticProps>) {
                     }`}
                     onClick={(e) => {
                       e.preventDefault();
-                      setSelectedProject("");
-                      if (section === selectedSection) {
-                        setSelectedSection("");
-                      } else {
-                        setSelectedSection(section);
-                      }
                     }}
                   >
                     <svg
@@ -108,8 +109,65 @@ function Home({ data }: InferGetStaticPropsType<typeof getStaticProps>) {
                   </a>
                 </div>
 
-                {selectedSection === section && (
-                  <div className={styles.projects}>
+                <div
+                  className={styles.projectCarousel}
+                  style={{
+                    opacity: selectedSection === section ? 1 : 0,
+                    maxHeight: selectedSection === section ? 200 : 0,
+                  }}
+                >
+                  <Carousel
+                    initialSlideHeight={200}
+                    heightMode="max"
+                    cellSpacing={16}
+                    slidesToScroll={1}
+                    slidesToShow={3}
+                    wrapAround={true}
+                    renderBottomCenterControls={null}
+                    renderCenterLeftControls={({ previousSlide }) => (
+                      <button
+                        onClick={previousSlide}
+                        className={styles.leftButton}
+                      >
+                        <svg
+                          width="48"
+                          height="48"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M6.34317 7.75732L4.92896 9.17154L12 16.2426L19.0711 9.17157L17.6569 7.75735L12 13.4142L6.34317 7.75732Z"
+                            fill="currentColor"
+                          />
+                        </svg>
+                      </button>
+                    )}
+                    renderCenterRightControls={({ nextSlide }) => (
+                      <button
+                        onClick={nextSlide}
+                        className={styles.rightButton}
+                      >
+                        <svg
+                          width="48"
+                          height="48"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M6.34317 7.75732L4.92896 9.17154L12 16.2426L19.0711 9.17157L17.6569 7.75735L12 13.4142L6.34317 7.75732Z"
+                            fill="currentColor"
+                          />
+                        </svg>
+                      </button>
+                    )}
+                    defaultControlsConfig={{
+                      pagingDotsStyle: {
+                        fill: "white",
+                      },
+                    }}
+                  >
                     {projects?.map((project, index) => {
                       return (
                         <div
@@ -149,8 +207,54 @@ function Home({ data }: InferGetStaticPropsType<typeof getStaticProps>) {
                         </div>
                       );
                     })}
-                  </div>
-                )}
+                  </Carousel>
+                </div>
+                {/* <div>
+                    {selectedSection === section && (
+                      <div className={styles.projects}>
+                        {projects?.map((project, index) => {
+                          return (
+                            <div
+                              className={styles.project}
+                              key={project.id}
+                              style={{
+                                marginRight:
+                                  index === projects.length - 1 ? "0px" : null,
+                              }}
+                            >
+                              <div className={styles.projectHeader}>
+                                <div className={styles.projectTitle}>
+                                  {project.headline}
+                                </div>
+                                <div className={styles.projectSubTitle}>
+                                  {project.headline}
+                                </div>
+                              </div>
+                              <div className={styles.projectDescription}>
+                                {project.description}
+                              </div>
+                              <a
+                                href="#"
+                                className={styles.projectImage}
+                                style={{
+                                  backgroundImage: `url(${project.tileImage?.url})`,
+                                }}
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  if (selectedProject === project) {
+                                    setSelectedProject("");
+                                  } else {
+                                    setSelectedProject(project);
+                                  }
+                                }}
+                              />
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+                    
+                  </div> */}
                 {selectedProject && selectedSection === section && (
                   <div className={styles.selectedProject}>
                     <FullView
@@ -165,6 +269,7 @@ function Home({ data }: InferGetStaticPropsType<typeof getStaticProps>) {
           })}
         </div>
       </div>
+
       <Footer footerData={data?.contact?.getInTouch?.html} />
     </>
   );
