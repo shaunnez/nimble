@@ -216,7 +216,7 @@
   position: relative;
 }
 .fullView .reactPlayer video {
-  background: var(--black);
+  background: transparent;
 }
 .fullView .image {
   padding-bottom: 51px;
