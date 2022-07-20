@@ -10,7 +10,10 @@ import Footer from "components/footer";
 import styles from "./index.module.css";
 
 const client = new GraphQLClient(
-  "https://api-ap-southeast-2.graphcms.com/v2/ckwwvc5mz82wk01z1bsq3f9ko/master"
+  "https://api-ap-southeast-2.graphcms.com/v2/ckwwvc5mz82wk01z1bsq3f9ko/master",
+  {
+    cache: "no-cache",
+  }
 );
 
 export const getStaticProps = async () => {
