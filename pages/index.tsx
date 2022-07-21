@@ -22,6 +22,7 @@ export const getStaticProps = async () => {
     props: {
       data,
     },
+    revalidate: 60,
   };
 };
 
@@ -34,6 +35,12 @@ function Home({ data }: InferGetStaticPropsType<typeof getStaticProps>) {
     setSelectedProject(project);
     setSelectedSection(section);
   };
+
+  let screenWidth = 1920;
+  // @ts-ignore
+  if (typeof window !== "undefined") {
+    screenWidth = window?.innerWidth;
+  }
 
   return (
     <>
@@ -124,7 +131,7 @@ function Home({ data }: InferGetStaticPropsType<typeof getStaticProps>) {
                     heightMode="max"
                     cellSpacing={16}
                     slidesToScroll={1}
-                    slidesToShow={3}
+                    slidesToShow={screenWidth < 1024 ? 1 : 3}
                     wrapAround={true}
                     renderBottomCenterControls={null}
                     renderCenterLeftControls={({ previousSlide }) => (
