@@ -200,7 +200,18 @@ p {
 }
 
 @media screen and (max-width: 768px) {
+  body {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
   header .mainLink a {
     font-size: 14px;
+  }
+
+  h1 {
+  }
+  p {
+    font-size: 12px !important;
+    line-height: 16px !important;
   }
 }

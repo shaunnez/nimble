@@ -123,11 +123,16 @@ function Home({ data }: InferGetStaticPropsType<typeof getStaticProps>) {
                   className={styles.projectCarousel}
                   style={{
                     opacity: selectedSection === section ? 1 : 0,
-                    maxHeight: selectedSection === section ? 200 : 0,
+                    maxHeight:
+                      selectedSection === section
+                        ? screenWidth < 1024
+                          ? 180
+                          : 200
+                        : 0,
                   }}
                 >
                   <Carousel
-                    initialSlideHeight={200}
+                    initialSlideHeight={screenWidth < 1024 ? 180 : 200}
                     heightMode="max"
                     cellSpacing={16}
                     slidesToScroll={1}
@@ -192,9 +197,6 @@ function Home({ data }: InferGetStaticPropsType<typeof getStaticProps>) {
                             <div className={styles.projectTitle}>
                               {project.headline}
                             </div>
-                            <div className={styles.projectSubTitle}>
-                              {project.headline}
-                            </div>
                           </div>
                           <div className={styles.projectDescription}>
                             {project.description}
@@ -219,6 +221,19 @@ function Home({ data }: InferGetStaticPropsType<typeof getStaticProps>) {
                     })}
                   </Carousel>
                 </div>
+
+                <div
+                  style={{
+                    opacity: selectedSection === section ? 1 : 0,
+                    maxHeight: selectedSection === section ? 200 : 0,
+                    overflow: "hidden",
+                    marginTop: selectedSection === section ? 24 : 0,
+                  }}
+                  className={styles.mobileContent}
+                  dangerouslySetInnerHTML={{
+                    __html: data?.home[`${section}Text`]?.html,
+                  }}
+                />
                 {/* <div>
                     {selectedSection === section && (
                       <div className={styles.projects}>

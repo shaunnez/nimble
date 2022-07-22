@@ -160,6 +160,8 @@
   flex-wrap: wrap;
   justify-content: space-between;
   font-weight: 400;
+  z-index: 2;
+  position: relative;
 }
 
 .projectDescription {
@@ -244,16 +246,21 @@
   opacity: 0.5;
 }
 
+.mobileContent {
+  display: none;
+}
+
 @media screen and (max-width: 768px) {
   .heroContent {
     padding-left: 0;
   }
 
   .sectionSummary h3 {
-    width: 44px;
-    height: 44px;
-    font-size: 18px;
+    width: 21px;
+    height: 21px;
+    font-size: 12px;
     margin-right: 16px;
+    margin-top: 8px;
   }
 
   .sectionContent {
@@ -265,7 +272,44 @@
     /* width: 50%; */
   }
 
+  .sectionSummary {
+    align-items: center;
+  }
+
+  .sectionArrow {
+    top: -8px !important;
+  }
+
+  .sectionArrow svg {
+    height: 48px;
+    width: 48px;
+  }
+  .sectionArrow svg {
+  }
+  .sectionContent p {
+    display: none;
+  }
+
   .fullView > section {
     padding-top: 500px;
+  }
+
+  .mobileContent {
+    display: block;
+    margin-top: 24px;
+
+    transition: all 0.25s ease-in-out;
+  }
+
+  .projectCarousel,
+  .project {
+    height: 185px;
+  }
+
+  .section {
+    margin-top: 45px;
+  }
+  .footer label {
+    font-size: 14px;
   }
 }
