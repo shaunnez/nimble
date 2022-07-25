@@ -16,20 +16,22 @@ const client = new GraphQLClient(
   }
 );
 
-export const getStaticProps = async () => {
-  const data: GetContentQuery = await client.request(GetContentDocument);
-  return {
-    props: {
-      data,
-    },
-    revalidate: 60,
-  };
-};
+// export const getStaticProps = async () => {
+//   const data: GetContentQuery = await client.request(GetContentDocument);
+//   return {
+//     props: {
+//       data,
+//     },
+//     revalidate: 60,
+//   };
+// };
 
-function Home({ data }: InferGetStaticPropsType<typeof getStaticProps>) {
+function Home() {
   const sections = ["small", "medium", "large", "xLarge"];
   const [selectedProject, setSelectedProject] = useState(null as any);
   const [selectedSection, setSelectedSection] = useState("");
+  const [data, setData] = React.useState(null as GetContentQuery);
+  const [loading, setLoading] = React.useState(true);
 
   const setProject = (project: any, section: string) => {
     setSelectedProject(project);
@@ -40,6 +42,21 @@ function Home({ data }: InferGetStaticPropsType<typeof getStaticProps>) {
   // @ts-ignore
   if (typeof window !== "undefined") {
     screenWidth = window?.innerWidth;
+  }
+
+  React.useEffect(() => {
+    const loadData = async () => {
+      const data: GetContentQuery = await client.request(GetContentDocument);
+      setData(data);
+      setLoading(false);
+    };
+    if (loading) {
+      loadData();
+    }
+  });
+
+  if (loading) {
+    return null;
   }
 
   return (
