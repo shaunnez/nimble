@@ -31,7 +31,7 @@ function Home() {
   const [selectedProject, setSelectedProject] = useState(null as any);
   const [selectedSection, setSelectedSection] = useState("");
   const [data, setData] = React.useState(null as GetContentQuery);
-  const [loading, setLoading] = React.useState(true);
+  const [loading, setLoading] = React.useState(null);
 
   const setProject = (project: any, section: string) => {
     setSelectedProject(project);
@@ -50,12 +50,13 @@ function Home() {
       setData(data);
       setLoading(false);
     };
-    if (loading) {
+    if (loading === null) {
+      setLoading(true);
       loadData();
     }
   });
 
-  if (loading) {
+  if (loading !== false) {
     return null;
   }
 
