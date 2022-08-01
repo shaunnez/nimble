@@ -23,7 +23,8 @@
     "react-player": "^2.9.0",
     "react-query": "^3.34.0",
     "sendgrid": "^5.2.3",
-    "sib-api-v3-sdk": "^8.2.1"
+    "sib-api-v3-sdk": "^8.2.1",
+    "video-react": "^0.15.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "2.2.1",

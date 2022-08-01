@@ -32,6 +32,7 @@ function Home() {
   const [selectedSection, setSelectedSection] = useState("");
   const [data, setData] = React.useState(null as GetContentQuery);
   const [loading, setLoading] = React.useState(null);
+  const [isPlaying, setIsPlaying] = React.useState(false);
 
   const setProject = (project: any, section: string) => {
     setSelectedProject(project);
@@ -56,6 +57,15 @@ function Home() {
     }
   });
 
+  React.useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY >= 66) {
+        document.querySelector("header").classList.add("change");
+      } else {
+        document.querySelector("header").classList.remove("change");
+      }
+    });
+  });
   if (loading !== false) {
     return null;
   }
@@ -71,6 +81,13 @@ function Home() {
               controls={true}
               width="100%"
               height="100%"
+              playing={isPlaying}
+              onPlay={() => {
+                setIsPlaying(true);
+              }}
+              onPause={() => {
+                setIsPlaying(false);
+              }}
             />
           </div>
         </div>
@@ -232,6 +249,7 @@ function Home() {
                               } else {
                                 setSelectedProject(project);
                               }
+                              setIsPlaying(false);
                             }}
                           />
                         </div>
@@ -302,8 +320,10 @@ function Home() {
                   <div className={styles.selectedProject}>
                     <FullView
                       selectedProject={selectedProject}
-                      setProject={setProject}
+                      setProject={setSelectedProject}
                       isMobile={false}
+                      isPlaying={isPlaying}
+                      setIsPlaying={setIsPlaying}
                     />
                   </div>
                 )}
@@ -318,7 +338,13 @@ function Home() {
   );
 }
 
-const FullView = ({ selectedProject, setProject, isMobile }: any) => {
+const FullView = ({
+  selectedProject,
+  setProject,
+  isMobile,
+  setIsPlaying,
+  isPlaying,
+}: any) => {
   return (
     <div id={`fullView${isMobile ? "Mobile" : ""}`} className={styles.fullView}>
       <Carousel
@@ -342,7 +368,11 @@ const FullView = ({ selectedProject, setProject, isMobile }: any) => {
                 url={asset.url}
                 controls={true}
                 width="100%"
+                playing={!isPlaying}
                 height="100%"
+                onPlay={() => {
+                  setIsPlaying(false);
+                }}
               />
               <button
                 className={styles.closeButton}
