@@ -3,11 +3,7 @@ query GetContent {
     heroText {
       html
     }
-    heroVideo {
-      id
-      fileName
-      url
-    }
+    heroVideoUrl
     smallText {
       html
     }
@@ -36,6 +32,7 @@ query GetContent {
         fileName
         url
       }
+      videos
     }
   }
   contact(where: { id: "ckwzn69b40kev0d829unc461i" }) {

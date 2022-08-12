@@ -2,6 +2,13 @@
   margin-top: 48px;
 }
 
+.home * {
+  outline: none;
+}
+.home video::-webkit-media-controls-panel {
+  background-image: linear-gradient(transparent, transparent) !important;
+}
+
 .hero {
   border: 2px solid #ffffff;
   border-radius: 12px;
@@ -13,6 +20,16 @@
   padding-top: calc(674 / 1200 * 100%);
   border-radius: 12px;
   background: var(--black);
+}
+
+.playButton {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: 5px;
+  z-index: 10;
+  transform: translateX(-50%) translateY(-50%);
+  color: black;
 }
 
 .reactPlayer {
@@ -109,7 +126,7 @@
 .projectCarousel {
   width: 100%;
   height: 200px;
-  margin-top: 16px;
+  margin-top: 32px;
   /* padding: 0px 48px; */
   transition: all 0.25s ease-in-out;
 }
@@ -174,23 +191,23 @@
 .projectImage {
   position: absolute;
   z-index: 1;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: contain;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background-size: cover;
   background-repeat: no-repeat;
   background-color: black;
   background-position: center;
   outline: none;
   transition: opacity 0.25s ease-in-out;
-  border-radius: 12px;
+  /* border-radius: 12px; */
 }
 
 .projectImage:hover,
 .projectImage:active,
 .projectImage:active {
-  opacity: 0;
+  opacity: 0.2;
 }
 
 .selectedProject {

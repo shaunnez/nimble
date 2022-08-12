@@ -77,7 +77,7 @@ function Home() {
           <div className={styles.playerWrapper}>
             <ReactPlayer
               className={styles.reactPlayer}
-              url={data.home?.heroVideo?.url}
+              url={data.home?.heroVideoUrl}
               controls={true}
               width="100%"
               height="100%"
@@ -270,52 +270,7 @@ function Home() {
                     __html: data?.home[`${section}Text`]?.html,
                   }}
                 />
-                {/* <div>
-                    {selectedSection === section && (
-                      <div className={styles.projects}>
-                        {projects?.map((project, index) => {
-                          return (
-                            <div
-                              className={styles.project}
-                              key={project.id}
-                              style={{
-                                marginRight:
-                                  index === projects.length - 1 ? "0px" : null,
-                              }}
-                            >
-                              <div className={styles.projectHeader}>
-                                <div className={styles.projectTitle}>
-                                  {project.headline}
-                                </div>
-                                <div className={styles.projectSubTitle}>
-                                  {project.headline}
-                                </div>
-                              </div>
-                              <div className={styles.projectDescription}>
-                                {project.description}
-                              </div>
-                              <a
-                                href="#"
-                                className={styles.projectImage}
-                                style={{
-                                  backgroundImage: `url(${project.tileImage?.url})`,
-                                }}
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  if (selectedProject === project) {
-                                    setSelectedProject("");
-                                  } else {
-                                    setSelectedProject(project);
-                                  }
-                                }}
-                              />
-                            </div>
-                          );
-                        })}
-                      </div>
-                    )}
-                    
-                  </div> */}
+
                 {selectedProject && selectedSection === section && (
                   <div className={styles.selectedProject}>
                     <FullView
@@ -345,6 +300,8 @@ const FullView = ({
   setIsPlaying,
   isPlaying,
 }: any) => {
+  const [activeIdx, setActiveIdx] = React.useState(0);
+
   return (
     <div id={`fullView${isMobile ? "Mobile" : ""}`} className={styles.fullView}>
       <Carousel
@@ -353,25 +310,31 @@ const FullView = ({
         renderCenterLeftControls={null}
         renderCenterRightControls={null}
         wrapAround={true}
+        afterSlide={(index: number) => {
+          setTimeout(() => {
+            setActiveIdx(index);
+            setIsPlaying(false);
+          }, 0);
+        }}
         defaultControlsConfig={{
           pagingDotsStyle: {
             fill: "white",
           },
         }}
       >
-        {selectedProject.assets.map((asset: any) => {
-          const isVideo = asset.fileName.indexOf("mp4") > -1;
-          return isVideo ? (
-            <div className={styles.projectReactPlayer} key={asset.id}>
+        {selectedProject?.videos?.map((asset: any, i: number) => {
+          return (
+            <div className={styles.projectReactPlayer} key={i}>
               <ReactPlayer
                 className={styles.reactPlayer}
-                url={asset.url}
-                controls={true}
+                url={asset}
                 width="100%"
-                playing={!isPlaying}
+                playing={!isPlaying && activeIdx === i}
+                controls={true}
                 height="100%"
                 onPlay={() => {
                   setIsPlaying(false);
+                  setActiveIdx(i);
                 }}
               />
               <button
@@ -384,12 +347,6 @@ const FullView = ({
                 <Image src="/close.svg" alt="Close" layout={"fill"} />
               </button>
             </div>
-          ) : (
-            <div
-              className={styles.image}
-              style={{ backgroundImage: `url(${asset.url})` }}
-              key={asset.id}
-            />
           );
         })}
       </Carousel>
