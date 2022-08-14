@@ -64,24 +64,29 @@ export default function Footer({ footerData }: FooterProps) {
     if (isValidForm) {
       setSubmitting(true);
       try {
-        const res = await fetch("/api/contact", {
-          body: JSON.stringify({
-            projectSize: projectSize,
-            name: name,
-            email: email,
-            phone: phone,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-          method: "POST",
+        await new Promise((resolve) => {
+          setTimeout(() => {
+            resolve(true);
+          }, 2000);
         });
-        console.log("herea", res);
-        const { error } = await res.json();
-        console.log("here", res, error);
-        if (error) {
-          throw Error();
-        }
+        // const res = await fetch("/api/contact", {
+        //   body: JSON.stringify({
+        //     projectSize: projectSize,
+        //     name: name,
+        //     email: email,
+        //     phone: phone,
+        //   }),
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   method: "POST",
+        // });
+        // console.log("herea", res);
+        // const { error } = await res.json();
+        // console.log("here", res, error);
+        // if (error) {
+        //   throw Error();
+        // }
         setShowSuccessMessage(true);
         setShowFailureMessage(false);
       } catch (ex) {
