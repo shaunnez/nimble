@@ -36,6 +36,13 @@
   position: absolute;
   top: 0;
   left: 0;
+  border-radius: 12px;
+  overflow: auto;
+}
+
+iframe {
+  border-radius: 12px;
+  overflow: auto;
 }
 
 .heroContent {
